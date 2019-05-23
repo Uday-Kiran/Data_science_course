@@ -1,0 +1,3051 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Skewness and Kurtosis in Data Science</title>
+<meta content="" name="description" />
+<meta content="" name="keywords" />
+<script src="/cdn-cgi/apps/head/3vUaLtaOTT1KvdSvezvQiLQdKHU.js"></script><link rel="canonical" href="https://www.excelr.com/skewness-and-kurtosis-in-data-science" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="HandheldFriendly" content="true" />
+<link rel="shortcut icon" href="https://www.excelr.com/assets/favicon.ico?v=0" type="image/x-icon">
+<link rel="stylesheet prefetch" href="https://www.excelr.com/assets/css/my_profile.css" />
+<link rel="stylesheet prefetch" href="https://www.excelr.com/assets/css/master.css?v=1.6.8" />
+<link rel="stylesheet prefetch" href="https://www.excelr.com/assets/css/excelrnav.min.css" />
+<link rel="stylesheet prefetch" href="https://www.excelr.com/assets/css/customscroll.css" />
+
+<link href="https://www.excelr.com/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet prefetch" type="text/css" />
+<link href="https://www.excelr.com/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet prefetch" type="text/css" />
+
+<link href="https://www.excelr.com/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet prefetch" type="text/css" />
+
+<link href="https://www.excelr.com/assets/plugins/switcher/css/switcher.css" rel="stylesheet prefetch" id="switcher-css" />
+<link rel="stylesheet prefetch" href="https://www.excelr.com/assets/css/responsive.css?v=1.0.7" />
+<link href="https://www.excelr.com/assets/admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet prefetch">
+<link rel="stylesheet prefetch" href="https://www.excelr.com/assets/css/jquery-ui.css">
+
+<meta name="robots" content="NOODP,NOYDIR" />
+<meta name="distribution" content="global">
+<meta name="copyright" content="Excelr: Online Professional Certification Training Courses India & USA">
+<meta name="language" content="English">
+<meta name="rating" content="general">
+<meta name="robots" content="ALL">
+<meta name="revisit-after" content="Daily">
+<meta name="author" content="Excelr Group">
+<meta name="googlebot" content="index,follow">
+<meta name="bingbot" content="index,follow">
+<meta name="expires" content="never">
+<meta name="coverage" content="Worldwide">
+
+<style>
+.ui-widget.ui-widget-content {
+    border: 0 solid #d3d3d3!important;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    webkit-box-shadow: 12px 15px 20px 0 rgba(46,61,73,.15);
+    box-shadow: 12px 15px 20px 0 rgba(46,61,73,.15);
+/*    transition: all .3s ease;*/
+    padding-left: 2px;
+    padding: 10px 0;
+}
+
+.ui-menu .ui-menu-item {
+    font-size: 15px;
+    padding-left: 6px;
+    padding: 4px 8px;
+	font-size:15px;
+	font-weight:400;
+	line-height:1.5;
+}
+
+.ui-menu .ui-menu-item-wrapper {
+    padding: 1px 1em 1px .4em;
+    color: #1a1a1a;
+}
+
+.ui-state-active {
+    border: 0 solid #d3d3d3!important;
+    color: #f69122!important;
+}
+.widget-contactus-content {
+    bottom: 160px;
+	height: auto;
+}
+.side-drop-eqry .box-body .form-group {
+   margin-bottom: 5px;
+}
+.side-drop-eqry .box-body .form-control{
+   margin-bottom: 0;
+}
+.btn-padding {
+	margin-top:10px;
+	padding: 3px 12px !important;
+}
+.frm-new .dropquery-modal-bg .form-control {
+     border-radius: 1rem !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+</style>
+
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+
+  !function(f,b,e,v,n,t,s)
+
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+
+  n.queue=[];t=b.createElement(e);t.async=!0;
+
+  t.src=v;s=b.getElementsByTagName(e)[0];
+
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '164627420800985');
+
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+
+  src="https://www.facebook.com/tr?id=164627420800985&ev=PageView&noscript=1"
+
+/></noscript>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-979964421" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-979964421');
+</script>
+<link rel="stylesheet prefetch" type="text/css" href="https://www.excelr.com/assets/css/jssocials.css" />
+<link rel="stylesheet prefetch" type="text/css" href="https://www.excelr.com/assets/css/jssocials-theme-flat.css" />
+</head>
+<body class="second-design">
+
+<div id="page-preloader"><span class="spinner border-t_second_b border-t_prim_a"></span> </div>
+
+<div class="l-theme animated-css" data-header="sticky" data-header-top="200" data-canvas="container">
+
+
+<div class="header-search open-search">
+<div class="container">
+<div class="row">
+<div class="col-sm-8 col-sm-offset-2 col-xs-12">
+<div class="navbar-search">
+<form class="search-global">
+<div class="input-group">
+
+<input class="search-global__input sea-inp form-control" type="text" placeholder="Search for Courses" autocomplete="off" name="course_search" id="course_search" />
+<span class="input-group-btn">
+<button class="sea-rem search-close close" type="button"><span class="fa fa-remove"></span></button>
+</span>
+</div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<header class="header header-5 header-topbar-hidden header-boxed-width navbar-fixed-top header-background-trans header-color-white header-logo-white header-navibox-1-left header-navibox-3-right header-navibox-4-right">
+<div class="container container-boxed-width">
+<div class="top-bar">
+<div class="container padding-left-cal">
+<div class="header-topbarbox-2">
+<div class="col-md-6 col-sm-6 col-xs-5 padding-left-cal">
+<ul>
+<li class="phno">Call Us 1800-212-2120</li>
+</ul>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-7 after-login">
+<ul class="social-links">
+<li><a href="https://www.facebook.com/ExcelR/" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Facebook"><img src="https://www.excelr.com/assets/media/general/face-book.svg" alt="fb.png"></a> </li>
+<li><a href="https://www.instagram.com/excelrsolutions" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Instagram"><img src="https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/instagram.svg" alt="instagram.svg"></a> </li>
+<li><a href="https://www.linkedin.com/company/excelr-solutions" target="_blank" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><img src="https://www.excelr.com/assets/media/general/linked-in.svg" alt="linkedin.png"></a></li>
+<li><a href="https://twitter.com/ExcelrS" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Twitter"><img src="https://www.excelr.com/assets/media/general/twitter-icon.svg" alt="twitter.png"></a> </li>
+<li><a href="https://www.youtube.com/channel/UCF2_gALht1C1NsAm3fmFLsg" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Youtube"><img src="https://www.excelr.com/assets/media/general/you-tube.svg" alt="youtube.png"></a> </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<nav class="navbar" id="nav">
+<div class="container">
+<div class="col-md-4 col-sm-6 col-xs-12 mobile-logo-no-pd  no-pad-left">
+<div class="col-md-5 col-sm-5 col-xs-5 mobile-logo-no-pd">
+<a class="navbar-brand scroll" href="https://www.excelr.com/"> <img class="normal-logo" src="https://www.excelr.com/assets/media/general/logo.png" alt="ExcelR" width="120" height="45" /> <img class="scroll-logo hidden-xs" src="https://www.excelr.com/assets/media/general/logo.png" alt="ExcelR" width="120" height="45" /> </a>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-7 no-padding">
+<select class="selectpicker" data-width="fit" name="country" id="country" onchange="if (!window.__cfRLUnblockHandlers) return false; select_country(this.value)" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<option value="Australia">Australia</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Canada">Canada</option>
+<option value="Egypt">Egypt</option>
+<option value="India" selected>India</option>
+<option value="Indonesia">Indonesia</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Netherlands The">Netherlands The</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Nigeria">Nigeria</option>
+<option value="Oman">Oman</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Philippines">Philippines</option>
+<option value="Poland">Poland</option>
+<option value="Qatar">Qatar</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Singapore">Singapore</option>
+<option value="South Africa">South Africa</option>
+<option value="Thailand">Thailand</option>
+<option value="Turkey">Turkey</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United States">United States</option>
+<option value="Vietnam">Vietnam</option>
+</select>
+</div>
+</div>
+<div class="col-md-8 col-sm-6 col-xs-12 no-padding">
+<div id="main-nav" class="excelrnav">
+<div class="srchbn"><a href="https://www.excelr.com/#" class="btn_header_search serch"><i class="fa fa-search serch" aria-hidden="true"></i>&nbsp;&nbsp;Search</a></div>
+<div class="clbn mobile-log"><a href="https://www.excelr.com/#" data-toggle="modal" data-target="#login-modal" class="login-btn">Log in</a> </div>
+
+<ul>
+<li class="all-course"> <a href="https://www.excelr.com/"><i class="fa fa-bars hidebtn" aria-hidden="true"></i>&nbsp;All Courses</a>
+<ul class="main-cateory">
+<li class="courhover"> <a class="white" href="https://www.excelr.com/online-training/">Online Trainings</a>
+<ul>
+<li> <a href="https://www.excelr.com/pmp-online-training/">PMP® Certification Training Online – USA, INDIA</a></li>
+<li> <a href="https://www.excelr.com/tableau-online-training-usa/">Tableau Desktop 2018 Online Certification Training</a></li>
+<li> <a href="https://www.excelr.com/servicenow-online-training/">ServiceNow Online Training</a></li>
+<li> <a href="https://www.excelr.com/business-analytics-online-training/">Certified Business Analytics / Data Scientist Training Program Online</a></li>
+<li> <a href="https://www.excelr.com/machine-learning-course-training-online/">Machine Learning Course Training Online</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/analytics-certifications/">Analytics Certifications</a>
+<ul>
+<li> <a href="https://www.excelr.com/data-science-course-training-in-bangalore/">Data Science Course Training</a></li>
+<li> <a href="https://www.excelr.com/data-science-certification-course-training/">Data Science Certification Course Training</a></li>
+<li> <a href="https://www.excelr.com/business-analytics-training-in-bangalore/">Certified Business Analytics / Data Scientist Training Program </a></li>
+<li> <a href="https://www.excelr.com/statistical-analysis/">Statistical Analysis Certification Training</a></li>
+<li> <a href="https://www.excelr.com/data-mining/">Data Mining Certification Training</a></li>
+<li> <a href="https://www.excelr.com/data-analytics-certification-training-course-in-bangalore/">Analytics / Data Analytics Certification Training Course</a></li>
+<li> <a href="https://www.excelr.com/deep-learning-and-artificial-intelligence/">Deep Learning and Artificial Intelligence (AI)</a></li>
+<li> <a href="https://www.excelr.com/forecasting/">Forecasting Certification Training</a></li>
+<li> <a href="https://www.excelr.com/data-visualization/">Data Visualization Certification Training</a></li>
+<li> <a href="https://www.excelr.com/machine-learning-course-training-in-bangalore/">Machine Learning Course Training</a></li>
+<li> <a href="https://www.excelr.com/advanced-analytics-deep-learning-using-r-python/">Advanced Analytics Training</a></li>
+<li> <a href="https://www.excelr.com/big-data-hadoop/">Big Data Hadoop & Spark Analytics</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/pmi-certifications/">Project Management Institute (PMI)® Certifications</a>
+<ul>
+<li> <a href="https://www.excelr.com/pmp-training-in-bangalore/">Project Management Professional (PMP)® Training Course</a></li>
+<li> <a href="https://www.excelr.com/pmi-pgmp/">Program Management Professional (PgMP)® Certification Training Course</a></li>
+<li> <a href="https://www.excelr.com/pmi-acp-training-in-bangalore/">PMI Agile Certified Practitioner (PMI-ACP)® Training</a></li>
+<li> <a href="https://www.excelr.com/pmi-risk-management-professional/">PMI Risk Management Professional (PMI-RMP)®</a></li>
+<li> <a href="https://www.excelr.com/pmi-agile-certified-practitioner-pmi-acp-certification-training-for-corporate/">PMI Agile Certified Practitioner (PMI-ACP)® Certification Training For Corporate</a></li>
+<li> <a href="https://www.excelr.com/pmi-certified-associate-in-project-management/">Certified Associate in Project Management (CAPM)®</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/technical-courses/">Technical Courses</a>
+<ul>
+<li> <a href="https://www.excelr.com/niche-technical-trainings/">Niche Technical Trainings</a>
+<ul>
+<li><a href="https://www.excelr.com/hybris-training/">Hybris Corporate Training</a></li>
+<li><a href="https://www.excelr.com/pentaho-training/">Pentaho Corporate Training</a></li>
+<li><a href="https://www.excelr.com/jaspersoft-training/">Jaspersoft Corporate Training</a></li>
+<li><a href="https://www.excelr.com/tibco-spotfire-training/">Tibco Spotfire Corporate Training</a></li>
+<li><a href="https://www.excelr.com/apache-maven-training/">Apache Maven Corporate Training</a></li>
+<li><a href="https://www.excelr.com/appdynamics-training/">Appdynamics Corporate Training</a></li>
+<li><a href="https://www.excelr.com/red-hat-satellite-server-training/">Red Hat Satellite Server Corporate Training</a></li>
+<li><a href="https://www.excelr.com/dell-boomi-training/">Dell Boomi Corporate Training</a></li>
+<li><a href="https://www.excelr.com/guidewire-training/">Guidewire Corporate Training</a></li>
+<li><a href="https://www.excelr.com/snowflake-training/">Snowflake Corporate Training</a></li>
+<li><a href="https://www.excelr.com/adobe-cq5-training/">Adobe CQ5 Corporate Training</a></li>
+<li><a href="https://www.excelr.com/duck-creek-training/">Duck Creek Corporate Training</a></li>
+<li><a href="https://www.excelr.com/sisense-training/">Sisense Corporate Training</a></li>
+<li><a href="https://www.excelr.com/ibm-bluemix-training/">IBM Bluemix Corporate Training</a></li>
+<li><a href="https://www.excelr.com/ruby-cucumber-training/">Ruby Cucumber Corporate Training</a></li>
+<li><a href="https://www.excelr.com/openstack-training/">OpenStack Corporate Training</a></li>
+ <li><a href="https://www.excelr.com/neo4j-training/">Neo4j Corporate Training</a></li>
+<li><a href="https://www.excelr.com/ansible-training/">Ansible Corporate Training</a></li>
+<li><a href="https://www.excelr.com/teamcity-training/">TeamCity Corporate Training</a></li>
+<li><a href="https://www.excelr.com/heat-lanrev-training/">Heat LANrev Corporate Training</a></li>
+<li><a href="https://www.excelr.com/lan-guard-training/">LanGuard Corporate Training</a></li>
+<li><a href="https://www.excelr.com/lotus-notes-training/">Lotus Notes Corporate Training</a></li>
+<li><a href="https://www.excelr.com/netcool-training/">Netcool Corporate Training</a></li>
+<li><a href="https://www.excelr.com/lombardi-training/">Lombardi Corporate Training</a></li>
+</ul>
+</li>
+<li> <a href="https://www.excelr.com/core-python-training/">Core Python Training</a></li>
+<li> <a href="https://www.excelr.com/service-now/">ServiceNow Development / Administration Certification Training </a></li>
+<li> <a href="https://www.excelr.com/service-portal/">Service Portal Training</a></li>
+<li> <a href="https://www.excelr.com/atlassian-tools/">Atlassian Tools Corporate Training</a></li>
+<li> <a href="https://www.excelr.com/jira-training/">Jira Corporate Training</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/itil-certifications/">ITIL® Certification Training</a>
+<ul>
+<li> <a href="https://www.excelr.com/itil-foundation-training-in-bangalore/">ITIL 4 Foundation Certification Training</a></li>
+<li> <a href="https://www.excelr.com/itil-intermediate-training-in-bangalore/">ITIL Intermediate Certification Training</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/lean-six-sigma-certifications/">Lean Six Sigma Certification Training</a>
+<ul>
+<li> <a href="https://www.excelr.com/lean-six-sigma-green-belt-training-in-bangalore/">Lean Six Sigma Green Belt Certification Training</a></li>
+<li> <a href="https://www.excelr.com/lean-six-sigma-black-belt-training-in-bangalore/">Lean Six Sigma Black Belt Certification Training</a></li>
+<li> <a href="https://www.excelr.com/lean-six-sigma-master-blackbelt/">Six Sigma Master Black Belt Certification Training</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/prince2-certifications/">PRINCE2 Certifications</a>
+<ul>
+<li> <a href="https://www.excelr.com/prince2-foundation/">PRINCE2 Foundation Certification Training</a></li>
+<li> <a href="https://www.excelr.com/prince2-practitioner/">PRINCE2 Practitioner Certification Training</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/tools-training/">Tools Training</a>
+<ul>
+<li> <a href="https://www.excelr.com/tableau-training-in-bangalore/">Tableau Desktop 2018 Qualified Associate Certification Training</a></li>
+<li> <a href="https://www.excelr.com/primavera-p6-training-in-bangalore/">Primavera-P6 Corporate Training</a></li>
+<li> <a href="https://www.excelr.com/primavera-unifier-training-in-bangalore/">Primavera Unifier</a></li>
+<li> <a href="https://www.excelr.com/minitab/">Minitab</a></li>
+<li> <a href="https://www.excelr.com/r-tool/">R Tool</a></li>
+<li> <a href="https://www.excelr.com/microsoft-project/">Microsoft Project (MPP) 2016</a></li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com/mind-maps/">Mind Maps</a>
+<ul>
+<li> <a href="https://www.excelr.com/mind-maps/">Data Science Mind Maps </a>
+<ul>
+<li><a href="https://www.excelr.com/basic-statistics-mind-map/">Basic Statistics Mind Map</a></li>
+<li><a href="https://www.excelr.com/data-mining-mind-map/">Data Mining Mind Map</a></li>
+<li><a href="https://www.excelr.com/hypothesis-testing-mind-map/">Hypothesis Testing Mind Map</a></li>
+<li><a href="https://www.excelr.com/forecasting-mind-map/">Forecasting Mind Map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="courhover"> <a class="white" href="https://www.excelr.com//">Cloud Computing</a>
+<ul>
+<li> <a href="https://www.excelr.com/amazon-web-services-aws-training-in-bangalore/">Amazon Web Services (AWS) Training</a></li>
+<li> <a href="https://www.excelr.com/cloud-computing-certification-course-training-in-bangalore/">Comprehensive Cloud Computing Course (C4)</a></li>
+<li> <a href="https://www.excelr.com/google-cloud-platform-training/">Google Cloud Platform Training</a></li>
+<li> <a href="https://www.excelr.com/microsoft-azure-certification-course-training/">Microsoft Azure Certification Course Training</a></li>
+</ul>
+</li>
+<li class="courhover"> <a href="https://www.excelr.com/artificial-intelligence-ai-course-training-in-bangalore/" class="white">Artificial Intelligence (AI) Course Training</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/internet-of-things-iot-in-bangalore/" class="white">Internet of Things (IoT)</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/digital-marketing-training-in-bangalore/" class="white">Digital Marketing Training</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/advanced-digital-marketing/" class="white">Advanced Digital Marketing</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/robotic-process-automation/" class="white">Robotic Process Automation Training</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/industrial-revolution-4-0/" class="white">Industrial Revolution 4.0/ IR 4.0/ Industry 4.0</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/augmented-reality-ar-virtual-reality-vr/" class="white">Augmented Reality (AR) & Virtual Reality (VR)</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/csm-certified-scrum-master/" class="white">Certified Scrum Master (CSM)</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/agile-pm-certification-dsdm-atern/" class="white">Agile PM Certification (DSDM Atern)</a></li>
+<li class="courhover"> <a href="https://www.excelr.com/blockchain-training-in-bangalore/" class="white">Blockchain Course Training Program</a></li>
+</ul>
+</li>
+<li><a class="blog-menu" href="https://www.excelr.com/blogs/">Blogs</a> </li>
+<li><a class="after-blog-menu" href="https://www.excelr.com/corporate-training/">Corporate Training</a> </li>
+<li><a class="after-blog-menu" href="https://www.excelr.com/franchise/">Become a Franchise</a> </li>
+<li><a class="after-blog-menu" href="https://www.excelr.com/forums/">Forums</a> </li>
+<li> <a href="https://www.excelr.com/#" class="btn_header_search hidebtn right-earch"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</a></li>
+<li><a class="login-btn hidebtn" href="#" data-toggle="modal" data-target="#login-modal">Log in</a> </li>
+
+</ul>
+</div>
+
+</div>
+</div>
+</nav>
+</div>
+</header>
+
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+ function select_country(id){
+	 event.preventDefault();
+	 location.reload();
+	 //var country_id = id;
+	 // var amount = $("#amount").val();
+	 
+	 /*$.ajax({
+        url:'home/get_country_details',
+		type:'post',
+        data:{'country_id':country_id},
+        success:function(data){
+			// location.reload();
+	   }
+    });*/
+ }
+</script><style>
+.second-design .header-navibox-1, .header-navibox-2, .header-navibox-3, .header-navibox-4 {
+	padding: 0;
+}
+.b-post-2 .entry-media {
+	position: relative;
+	float: left;
+	width: 100%;
+}
+.b-post-2 .entry-main {
+	margin-left: 0;
+	padding: 10px 10px 0 20px;
+}
+.b-post-2 .entry-media {
+	position: relative;
+	float: inherit;
+	width: 100%;
+}
+.b-post-2 .entry-title {
+	margin-top: 9px;
+	margin-bottom: 0;
+	padding-bottom: 10px;
+	font-size: 19px;
+	line-height: 1.4545;
+	letter-spacing: 0;
+	font-size:14px;
+	font-weight:600;
+	text-transform: uppercase;
+}
+.b-post-2 .entry-footer {
+	margin-top: 0;
+	margin: 10px 0;
+}
+</style>
+<div class="l-theme animated-css">
+<div class="banner-breadcrumb">
+<div class="container"> <span> <a href="https://www.excelr.com/"><span>Home</span></a> &gt; </span><span> <a href="https://www.excelr.com/blogs/"><span>Blog</span></a> &gt; </span><span> <a href="#"><span style="color:#555;cursor: text;">Blog Details</span></a> </span> </div>
+</div>
+<div class="section-title-page area-bg area-bg_op_85 area-bg_grad-1" style="background-image: url(https://www.excelr.com/uploads/blog/banner_1_-_Copy56.jpg)">
+<div class="area-bg__inner">
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+<div class="b-title-page__subtitle">Skewness and Kurtosis in Data Science</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="bg-grey">
+<div class="container">
+<div class="row">
+<div class="col-md-9 col-sm-8">
+<div class="posts-group posts-group_pdg_right">
+<article class="b-post-full clearfix">
+<div class="entry-media"> <a class="img-decor-btm" href="#"> <img class="img-responsive" src="https://www.excelr.com/uploads/blog/analytics2.jpg" alt="analytics2.jpg" />
+</a>
+<div class="entry-date">30<span class="entry-date__month">Oct</span> </div>
+</div>
+<div class="entry-main">
+<div class="entry-header">
+
+<h2 class="entry-title">Skewness and Kurtosis in Data Science</h2>
+</div>
+<div class="entry-content">
+<ul>
+<li data-fontsize="18" data-lineheight="27">Kurtosis measures peakedness of the distribution</li>
+<li data-fontsize="18" data-lineheight="27">Skewness is also called a&nbsp;THIRD MOMENT BUSINESS DECISION</li>
+<li data-fontsize="18" data-lineheight="27">Kurtosis is also called a&nbsp;FOURTH MOMENT BUSINESS DECISION</li>
+</ul>
+<h1 data-fontsize="18" data-lineheight="27"><span style="font-size:16px;">&nbsp; &nbsp; Skewness measures asymmetry in the distribution</span></h1>
+<p data-fontsize="18" data-lineheight="27"><img class="img-responsive" src="https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/icons/mind%20map/blogs/blogs1/blogs2/blogs3/blogs4/1_8.jpg" style="width: 733px; height: 536px;margin-bottom: -24px;" /></p>
+</div>
+<div class="entry-footer">
+<div class="post-tags">
+
+<div id="shareRoundIcons"></div>
+</div>
+</div>
+</div>
+</article>
+
+
+<section class="section-reply-form" id="section-reply-form">
+<h2 class="section-reply-form__title">Post Comments</h2>
+<div class="ui-decor-2 ui-decor-2_no-border bg-primary_a"></div>
+<form class="form-reply ui-form" method="post" onsubmit="if (!window.__cfRLUnblockHandlers) return false; post_reply()" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div id="result" style="font-style:bold;color:green;display:none;">Thanks for comment. Your comment has been submitted for admin's approval.</div>
+<div class="row mgbm-20">
+<div class="col-md-6">
+<input class="form-control" type="text" name="username" id="username" placeholder="Your Name *" />
+<span id="username_err" style="color:red; padding:0"></span>
+<input type="hidden" name="b_id" id="b_id" value="115" />
+</div>
+<div class="col-md-6">
+<input class="form-control" type="text" name="useremail" id="useremail" placeholder="Email Address *" />
+<span id="useremail_err" style="color:red; padding:0"></span>
+<span id="useremail_err1" style="color:red; padding:0"></span>
+</div>
+</div>
+<div class="row mgbm-20">
+<div class="col-xs-12">
+<input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" />
+<span id="subject_err" style="color:red; padding:0"></span>
+<textarea class="form-control" rows="4" name="message" id="message" placeholder="Your Comments *"></textarea>
+<span id="usermsg_err" style="color:red; padding:0"></span>
+</div>
+</div>
+<div class="row mgbm-20">
+<div class="col-xs-12">
+<button class="btn btn-grad-1 btn-singlecolor" type="submit">Post comment</button>
+</div>
+</div>
+</form>
+</section>
+
+</div>
+</div>
+<div class="col-md-3 col-sm-4">
+<aside class="l-sidebar blog-sidebar">
+ 
+<section class="widget section-sidebar bcm-authr" id="author_registration">
+<h3 class="widget-title ui-title-inner">Become an Author</h3>
+<div class="ui-decor-2 bg-primary_a"></div>
+<div class="widget-content">
+<form class="ui-form" id="contactForm" onsubmit="if (!window.__cfRLUnblockHandlers) return false; author_registration()" method="post" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div id="result1" style="color: #62d862;font-weight: bold;display:none;">Registered Successfully</div>
+<div id="result2" style="color: #ff0000;font-weight: bold;display:none;">This Email id is already exist.</div>
+<div class="row">
+<div class="col-xs-12">
+<input type="hidden" name="blog_id" id="blog_id" value="115" />
+<input class="form-control" id="user_name" type="text" name="user_name" placeholder="Your Name *" />
+<span id="uname_err" style="color:red;padding:0"></span>
+<input class="form-control" id="user_email" type="text" name="user_email" placeholder="Email Address *" /><span id="uemail_err" style="color:red;padding:0"></span>
+<span id="uemail_err1" style="color:red;padding:0"></span>
+<input class="form-control" id="user_mobile" type="text" name="user_mobile" placeholder="Mobile No.*" maxlength="12" onkeypress="if (!window.__cfRLUnblockHandlers) return false; return isNumber(event)" data-cf-modified-4f8049cea8ff66ffeb30ed30-="" />
+<span id="umobile_err" style="color:red;padding:0"></span>
+</div>
+<div class="col-xs-12">
+<button class="btn btn-grad-1 btn-singlecolor" type="submit">Submit</button>
+</div>
+</div>
+</form>
+</div>
+</section>
+
+<section class="widget section-sidebar bcm-authr">
+<h3 class="widget-title ui-title-inner">categories</h3>
+<div class="ui-decor-2 bg-primary_a"></div>
+<div class="widget-content">
+<ul class="widget-list list-unstyled">
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/data-science">Data Science</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/project-management">Project Management</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/six-sigma">Six Sigma</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/itil-management">ITIL Management</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/digital-marketing">Digital Marketing</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/internet-of-things">Internet of Things</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/techonologies">Techonologies</a> </li>
+<li class="widget-list__item"><a class="widget-list__link" href="https://www.excelr.com/blog-category/robotic-process-automation">Robotic Process Automation</a> </li>
+</ul>
+</div>
+</section>
+
+<section class="widget section-sidebar">
+<div class="blog-pop">
+<h3 class="widget-title ui-title-inner">Popular Courses</h3>
+<div class="ui-decor-2 bg-primary_a"></div>
+<div class="widget-content">
+<section class="post-widget blog-detail clearfix">
+<div class="post-widget__media">
+<a href="https://www.excelr.com/business-analytics">
+<img class="img-responsive" src="https://www.excelr.com/uploads/course_image/ds_thumbnail2.svg" alt="uploads/course_image/ds_thumbnail2.svg">
+</a>
+</div>
+<h4 class="post-widget__title ui-title-inner"><a href="https://www.excelr.com/business-analytics">Data Science Certification Course Training </a></h4>
+<div class="post-widget__date">
+<ul>
+<li><span style="color:#000000;">10,200+ Professionals Trained</span></li>
+<li><span style="</div">
+
+</section>
+</div>
+</div>
+<h3 class="widget-title ui-title-inner">latest blogs</h3>
+<div class="ui-decor-2 bg-primary_a"></div>
+<div class="widget-content">
+<section class="post-widget clearfix">
+<div class="post-widget__media">
+<a href="https://www.excelr.com/bagging-and-boosting"> <img class="img-responsive" src="https://www.excelr.com/uploads/blog/Bagging_and_Boosting.jpg" alt="Bagging and Boosting"> </a> </div>
+<h4 class="post-widget__title ui-title-inner"><a href="https://www.excelr.com/bagging-and-boosting">Bagging and Boosting</a></h4>
+<div class="post-widget__date">
+</div>
+
+</section>
+<section class="post-widget clearfix">
+<div class="post-widget__media">
+<a href="https://www.excelr.com/principle-of-parsimony"> <img class="img-responsive" src="https://www.excelr.com/uploads/blog/Principle_of_Parsimony.jpg" alt="Principle of Parsimony"> </a> </div>
+<h4 class="post-widget__title ui-title-inner"><a href="https://www.excelr.com/principle-of-parsimony">Principle of Parsimony</a></h4>
+<div class="post-widget__date">
+</div>
+
+</section>
+<section class="post-widget clearfix">
+<div class="post-widget__media">
+<a href="https://www.excelr.com/how-data-analytics-certification-can-contribute-to-your-career"> <img class="img-responsive" src="https://www.excelr.com/uploads/blog/How_Data_Analytics_Certification_Can_Contribute_to_Your_Career.jpg" alt="How Data Analytics Certification Can Contribute to Your Career"> </a> </div>
+<h4 class="post-widget__title ui-title-inner"><a href="https://www.excelr.com/how-data-analytics-certification-can-contribute-to-your-career">How Data Analytics Certification Can Contribute to Your Career</a></h4>
+<div class="post-widget__date">
+Certification pla </div>
+
+</section>
+<section class="post-widget clearfix">
+<div class="post-widget__media">
+<a href="https://www.excelr.com/what-are-the-benefits-of-online-training"> <img class="img-responsive" src="https://www.excelr.com/uploads/blog/Blog_onlinebenifits.jpg" alt="What Are the Benefits Of Online Training?"> </a> </div>
+<h4 class="post-widget__title ui-title-inner"><a href="https://www.excelr.com/what-are-the-benefits-of-online-training">What Are the Benefits Of Online Training?</a></h4>
+<div class="post-widget__date">
+If you are a know </div>
+
+</section>
+<section class="post-widget clearfix">
+<div class="post-widget__media">
+<a href="https://www.excelr.com/taking-insights-to-the-benefits-of-data-analytics"> <img class="img-responsive" src="https://www.excelr.com/uploads/blog/blog_ds_benifits.jpg" alt="Taking Insights to The Benefits of Data Analytics"> </a> </div>
+<h4 class="post-widget__title ui-title-inner"><a href="https://www.excelr.com/taking-insights-to-the-benefits-of-data-analytics">Taking Insights to The Benefits of Data Analytics</a></h4>
+<div class="post-widget__date">
+Every business th </div>
+
+</section>
+</div>
+</section>
+
+</aside>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+  function post_reply(){
+	event.preventDefault();
+	var username = $("#username").val();
+	var useremail = $("#useremail").val();
+	var subject = $("#subject").val();
+	var message = $("#message").val();
+	var blog_id = $("#b_id").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(useremail); 
+    var e1 = useremail.split("@");
+	var e2 = e1[0];
+	var msg = 0;
+	
+	if(username == ''){
+		$('#username').css('border-color', 'red');
+		$('#username_err').html('Name is required');
+		msg = 1;
+	}else if($.isNumeric(username)){
+		$('#username').css('border-color', 'red');
+		$('#username_err').html('Name must be some alphabets');
+		msg = 1;
+	}else{
+		$('#username').css('border-color', '#ddd');
+		$('#username_err').hide();
+		// msg = 0;
+	}if(useremail == ''){
+		$('#useremail').css('border-color', 'red');
+		$('#useremail_err').html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#useremail').css('border-color', 'red');
+		$('#useremail_err').html('Email must be some alphabets');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#useremail').css('border-color', 'red');
+		$('#useremail_err').hide();
+		$('#useremail_err1').html('Invalid Email');
+		 msg = 1;
+	}else{
+		$('#useremail').css('border-color', '#ddd');
+		$('#useremail_err').hide();
+		$('#useremail_err1').hide();
+		// msg = 0;
+	}if(subject == ''){
+		$('#subject').css('border-color', 'red');
+		$('#subject_err').html('Subject is required');
+		msg = 1;
+	}else{
+		$('#subject').css('border-color', '#ddd');
+		$('#subject_err').hide();
+		// msg = 0;
+	}if(message == ''){
+		$('#message').css('border-color', 'red');
+		$('#usermsg_err').html('Comment is required');
+		msg = 1;
+	}else{
+		$('#message').css('border-color', '#ddd');
+		$('#usermsg_err').hide();
+		// msg = 0;
+	}
+	if(msg==1)
+		return false;
+	else{  
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/post_reply",
+		dataType: 'json',
+		data: {blog_id: blog_id,username: username, useremail: useremail, subject: subject, message: message},
+		success: function(data) {
+			$("#result").show();
+			$("#username").val('');
+			$("#useremail").val('');
+			$("#subject").val('');
+			$("#message").val('');
+		}
+	});
+	}	
+  } 
+  function author_registration(){
+	// event.preventDefault();
+	var country_code = $("#user_mobile").intlTelInput("getSelectedCountryData").dialCode;
+	var user_name = $("#user_name").val();
+	var user_email = $("#user_email").val();
+	var user_mobile = $("#user_mobile").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(user_email); 
+    var msg = 0;
+	var e1 = user_email.split("@");
+	var e2 = e1[0];
+	if(user_name == ''){
+		$('#user_name').css('border-color', 'red');
+		$('#uname_err').html('Name is required');
+		msg = 1;
+	}else if($.isNumeric(user_name)){
+		$('#user_name').css('border-color', 'red');
+		$('#uname_err').html('Name must be some alphabets');
+		msg = 1;
+	}else{
+		$('#user_name').css('border-color', '#ddd');
+		$('#uname_err').hide();
+		// msg = 0;
+	}if(user_mobile == ''){
+		$('#user_mobile').css('border-color', 'red');
+		$('#umobile_err').html('Mobile No. is required');
+		msg = 1;
+	}else if(user_mobile.length<10){
+		$('#user_mobile').css('border-color', 'red');
+		$('#umobile_err').html('Mobile No. must be 10 to 12 digits');
+		msg = 1;
+	}else{
+		$('#user_mobile').css('border-color', '#ddd');
+		$('#umobile_err').hide();
+		// msg = 0;
+	}if(user_email == ''){
+		$('#user_email').css('border-color', 'red');
+		$('#uemail_err').html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#user_email').css('border-color', 'red');
+		$('#uemail_err').html('Email must be some alphabets');
+		msg = 1;
+	}else if(!validEmail || validEmail == false) {
+        $('#user_email').css('border-color', 'red');
+		$('#uemail_err').hide();
+		$('#uemail_err1').html('Invalid Email');
+		 msg = 1;
+	}else{
+		$('#user_email').css('border-color', '#ddd');
+		$('#uemail_err1').hide();
+		$('#uemail_err').hide();
+		// msg = 0;
+	}
+	if(msg==1)
+		return false;
+	else if(msg==0 && validEmail==true){
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/author_registration",
+		dataType: 'json',
+		data: {user_name: user_name, user_email: user_email, user_mobile: user_mobile,country_code:country_code},
+		success: function(data) {
+			if(data == "exist"){
+				$("#result1").hide();
+				$("#result2").show();
+			}else if(data == "success"){
+				$("#result1").show();
+				$("#result2").hide();
+				$("#user_name").val('');
+				$("#user_email").val('');
+				$("#user_mobile").val('');
+			}
+		}
+		}); 
+	}
+  }
+  function reply_comment(value){
+	  event.preventDefault();
+	 $("#reply_button").hide();
+	 $.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/reply_comment",
+		data: {comment_id: value},
+		success: function(data) {
+			 $("#show_reply"+value).append(data);
+		}
+	}); 
+ }
+ function save_reply(){
+	event.preventDefault();
+	var comment_id = $("#comment_id").val();
+	var message = $("#rmessage").val();
+	var username = $("#rusername").val();
+	var useremail = $("#ruseremail").val();
+	var subject = $("#rsubject").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(useremail); 
+    var msg = 0;
+	var e1 = useremail.split("@");
+	var e2 = e1[0];
+	
+	if(username == ''){
+		$('#rusername').css('border-color', 'red');
+		$('#rusername_err').html('Name is required');
+		msg = 1;
+	}else if($.isNumeric(username)){
+		$('#rusername').css('border-color', 'red');
+		$('#rusername_err').html('Name must be some alphabets');
+		msg = 1;
+	}else{
+		$('#rusername').css('border-color', '#ddd');
+		$('#rusername_err').hide();
+		// msg = 0;
+	}if(useremail == ''){
+		$('#ruseremail').css('border-color', 'red');
+		$('#ruseremail_err').html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#ruseremail').css('border-color', 'red');
+		$('#ruseremail_err').html('Email must be some alphabets');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#ruseremail').css('border-color', 'red');
+		$('#ruseremail_err').html('Invalid Email');
+		 msg = 1;
+	}else{
+		$('#ruseremail').css('border-color', '#ddd');
+		$('#ruseremail_err').hide();
+		// msg = 0;
+	}if(subject == ''){
+		$('#rsubject').css('border-color', 'red');
+		$('#rsubject_err').html('Subject is required');
+		msg = 1;
+	}else{
+		$('#rsubject').css('border-color', '#ddd');
+		$('#rsubject_err').hide();
+		// msg = 0;
+	}if(message == ''){
+		$('#rmessage').css('border-color', 'red');
+		$('#rmessage_err').html('Comment is required');
+		msg = 1;
+	}else{
+		$('#rmessage').css('border-color', '#ddd');
+		$('#rmessage_err').hide();
+		// msg = 0;
+	}
+	if(msg==1){
+		return false;
+	}else{
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/save_reply",
+		dataType: 'json',
+		data: {comment_id: comment_id, message: message, username: username, useremail: useremail, subject: subject},
+		success: function(data) {
+			  $("#reply_result").show();
+			  $("#rusername").val('');
+			  $("#ruseremail").val('');
+			  $("#rsubject").val('');
+			  $("#rmessage").val('');
+		}
+	}); 
+	}
+ }
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+    </script>
+
+<div class="widget-contactus-clp hidden-xs">
+<div id="widget-contactus-content" class="widget-contactus-content">
+<span class="widget-contactus-close widget-contactus-btn ga_learningPath">Hide</span>
+<h4 class="advisor-txt">Quick Enquiry</h4>
+<div class="box_contact">
+<div class="side-drop-eqry">
+<form role="form" action="#" method="POST" enctype="multipart/form-data" onsubmit="if (!window.__cfRLUnblockHandlers) return false; quick_enquiry()" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div class="box-body">
+<div id="enq_result1" style="font-style:bold;color:green;display:none;"> Query Sent Successfully</div>
+<div class="form-group">
+<input class="form-control" id="enq_user_name1" type="text" name="enq_user_name1" placeholder="Your Name *" />
+<span id="enq_name_err1" style="color:red;padding:0px;float: left;"></span>
+</div>
+<div class="form-group">
+<input class="form-control" id="enq_user_email1" type="text" name="enq_user_email1" placeholder="Email Address *" />
+<span id="enq_email_err1" style="color:red;padding:0px;float: left;"></span>
+</div>
+<div class="form-group">
+<input class="form-control" maxlength="12" id="enq_user_mobile1" type="text" name="enq_user_mobile1" placeholder="Mobile *" onkeypress="if (!window.__cfRLUnblockHandlers) return false; return isNumber(event)" data-cf-modified-4f8049cea8ff66ffeb30ed30-="" />
+<span id="enq_mob_err1" style="color:red;padding:0px;float: left;"></span>
+</div>
+<div class="form-group">
+<input class="form-control" id="enq_user_location1" type="text" name="enq_user_location1" placeholder="Location *" />
+<span id="enq_location_err1" style="color:red;padding:0px;float: left;"></span>
+</div>
+<div class="form-group">
+<input class="form-control last-block_mrg-btn_0" id="enq_user_course1" type="text" name="enq_user_course1" placeholder="Enter Course *" />
+<span id="enq_course_err1" style="color:red;padding:0px;float: left;"></span>
+</div>
+<div class="form-group">
+<textarea class="form-control" name="enq_user_message1" id="enq_user_message1" placeholder="Message Body"></textarea>
+<span id="enq_msg_err1" style="color:red;padding:0px;float: left;"></span>
+</div>
+</div>
+
+<div class="box-footer">
+<img class="qe-ajax-loader" src="https://www.excelr.com/assets/media/general/loader.gif" alt="loader" style="width: 35px;display: none;">
+<button class="btn btn-grad-1 btn-singlecolor btn-padding qe-btn" id="add_query" type="submit">Submit</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div id="widget-contactus-btn" class="widget-contactus-btn ga_learningPath"> &nbsp; CONTACT US </div>
+</div>
+
+<footer class="footer">
+<div class="container">
+<div class="footer__main">
+<div class="row">
+<div class="col-md-3 col-sm-3">
+<div class="footer-section">
+<div class="footer__info">
+<p><span style="color:#ffffff"><strong>Organization</strong></span></p>
+<p><a href="https://www.excelr.com/about-us/"><span class="g-mr-5">About Us</span></a><br />
+<a href="https://www.excelr.com/contact-us/"><span class="g-mr-5">Contact Us</span></a><br />
+<a href="https://www.excelr.com/in-media/"><span class="g-mr-5">In Media</span></a><br />
+<a href="https://www.excelr.com/gallery/"><span class="g-mr-5">Gallery</span></a><br />
+<a href="https://www.excelr.com/news-events/"><span class="g-mr-5">News Events</span></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-3 col-sm-3">
+<div class="footer-section">
+<div class="footer__info">
+<div style="background: #1a1a1a;">
+<p><strong><span style="color:#ffffff;">Resources</span></strong></p>
+<p><span class="g-mr-5">Free Quizzes</span><br />
+<a href="https://www.excelr.com/blogs/"><span class="g-mr-5">Blogs</span></a><br />
+<a href="https://www.excelr.com/forums/"><span class="g-mr-5">Forums</span></a><br />
+<a href="https://www.excelr.com/webinars/"><span class="g-mr-5">Webinars</span></a><br />
+<a href="https://elearning.excelr.com/"><span class="g-mr-5">Self-Paced Learning</span></a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-3 col-sm-3">
+<section class="footer-section footer-contact">
+
+<p><span style="color:#ffffff;"><strong>Lines Of Business</strong></span></p>
+<p><a href="https://www.excelr.com/franchise/"><span class="g-mr-5">Become A Franchise</span></a><br />
+<a href="https://www.excelr.com/our-franchises/"><span class="g-mr-5">Our Franchises</span></a><br />
+<a href="https://www.excelr.com/corporate-training"><span class="g-mr-5">Corporate Training</span></a></p>
+</section>
+</div>
+<div class="col-md-3 col-sm-3">
+<section class="footer-section footer-contact">
+<div class="payment-icons">
+<div>
+<img alt="Payment" src="https://www.excelr.com/assets/media/icons/payment-icons.png" class="img-responsive">
+</div>
+</div>
+<a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; window.open('https://www.sitelock.com/verify.php?site=excelr.com','SiteLock','width=600,height=600,left=160,top=170');" data-cf-modified-4f8049cea8ff66ffeb30ed30-=""><img class="img-responsive" alt="SiteLock" title="SiteLock" src="//shield.sitelock.com/shield/excelr.com" style="width: 100px;margin-top: 20px;"></a>
+</section>
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid no-padding">
+<div class="footer-links-bg">
+<div class="container">
+<div class="row footer-links">
+<div class="col-md-12 no-padding">
+<div class="col-md-9 col-sm-8 col-xs-12">
+<ul class="footer-poli">
+<li><a class="g-mr-5" href="https://www.excelr.com/terms-and-conditions/" rel="nofollow">Terms And Conditions&nbsp;&nbsp;|</a></li>
+<li><a class="g-mr-5" href="https://www.excelr.com/privacy-policy/" rel="nofollow">Privacy Policy&nbsp;&nbsp;|</a></li>
+<li><a class="g-mr-5" href="https://www.excelr.com/refund-policy/" rel="nofollow">Refund Policy&nbsp;&nbsp;|</a></li>
+<li><a class="g-mr-5" href="https://www.excelr.com/sitemap/" rel="nofollow">Sitemap</a></li>
+</ul>
+</div>
+<div class="col-md-3 col-sm-4 col-xs-12">
+<ul class="list-unstyled social-links footer-social">
+<li><a class="tool-tp" data-placement="top" data-toggle="tooltip" href="https://www.facebook.com/ExcelR/" target="_blank" title="Facebook"><img alt="fb.png" src="https://www.excelr.com/assets/media/general/face-book.svg" /></a></li>
+<li><a class="tool-tp" data-placement="top" data-toggle="tooltip" href="https://www.instagram.com/excelrsolutions" target="_blank" title="Instagram"><img alt="gplus.png" src="https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/instagram.svg" style="width: 34px; height: 34px;" /></a></li>
+<li><a class="tool-tp" data-placement="top" data-toggle="tooltip" href="https://www.linkedin.com/company/excelr-solutions" target="_blank" title="LinkedIn"><img alt="LinkedIn" src="https://www.excelr.com/assets/media/general/linked-in.svg" /></a></li>
+<li><a class="tool-tp" data-placement="top" data-toggle="tooltip" href="https://twitter.com/ExcelrS" target="_blank" title="Twitter"><img alt="twitter.png" src="https://www.excelr.com/assets/media/general/twitter-icon.svg" /></a></li>
+<li><a class="tool-tp" data-placement="top" data-toggle="tooltip" href="https://www.youtube.com/channel/UCF2_gALht1C1NsAm3fmFLsg" target="_blank" title="Youtube"><img alt="youtube.png" src="https://www.excelr.com/assets/media/general/you-tube.svg" /></a></li>
+</ul>
+</div>
+</div>
+</div>
+<ul class="list-unstyled">
+<li><span class="g-mr-5">Emerging Technologies : </span>
+<ul class="list-inline d-inline">
+<li><a href="https://www.excelr.com/artificial-intelligence-ai-course-training/">&nbsp;<span class="g-mr-5">Artificial Intelligence&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/machine-learning-course-training/">&nbsp;<span class="g-mr-5">Machine Learning&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/augmented-reality-ar-virtual-reality-vr/"><span class="g-mr-5">AR / VR&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/industrial-revolution-4-0/"><span class="g-mr-5">IR 4.0&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/internet-of-things/"><span class="g-mr-5">IoT&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/blockchain-training/"><span class="g-mr-5">Block Chain&nbsp; |</span></a></li>
+<li><span class="g-mr-5">Cyber Security&nbsp; |</span></li>
+<li><span class="g-mr-5">Financial Analytics&nbsp; |</span></li>
+<li><span class="g-mr-5">Retail / Supply Chain Analytics&nbsp; |</span></li>
+<li><span class="g-mr-5">Social Media and Web Analytics&nbsp; |</span></li>
+<li><span class="g-mr-5"><a href="https://www.excelr.com/forecasting/"><span class="g-mr-5">Forecasting Analytics</span></a></span><a href="https://www.excelr.com/forecasting/"><span class="g-mr-5">&nbsp; |</span></a></li>
+<li><span class="g-mr-5">Text Mining and NLP&nbsp; |</span></li>
+<li><span class="g-mr-5">Business Intelligence&nbsp; |</span></li>
+<li><a href="https://www.excelr.com/digital-marketing-training/"><span class="g-mr-5">Digital Marketing&nbsp; &nbsp;|</span></a></li>
+<li><a href="https://www.excelr.com/robotic-process-automation/"><span class="g-mr-5">RPA&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/amazon-web-services-aws/"><span class="g-mr-5">AWS&nbsp; |</span></a></li>
+<li><span class="g-mr-5">Cloud Computing&nbsp; |</span></li>
+<li><span class="g-mr-5">Microsoft Azure&nbsp; |</span></li>
+<li><a href="https://www.excelr.com/google-cloud-platform-training/"><span class="g-mr-5">Google Cloud Platform&nbsp; |</span></a></li>
+</ul>
+</li>
+<li><span class="g-mr-5">Quality Management :&nbsp; </span>
+<ul class="list-inline d-inline">
+<li><a href="https://www.excelr.com/lean-six-sigma-green-belt/"><span class="g-mr-5">Lean Six Sigma Green Belt&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/lean-six-sigma-black-belt/"><span class="g-mr-5">Lean Six Sigma Black Belt&nbsp; |</span></a></li>
+<li><span class="g-mr-5">ISO |</span></li>
+<li><a href="https://www.excelr.com/lean-six-sigma-master-blackbelt/"><span class="g-mr-5">Master Black Belt&nbsp; |</span></a></li>
+</ul>
+</li>
+<li><span class="g-mr-5">Analytics :&nbsp; </span>
+<ul class="list-inline d-inline">
+<li><a href="https://www.excelr.com/deep-learning-and-artificial-intelligence/"><span class="g-mr-5">Deep Learning&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/tableau/"><span class="g-mr-5">Tableau&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/big-data-hadoop/"><span class="g-mr-5">Big Data Hadoop&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/business-analytics/"><span class="g-mr-5">Business Analytics&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/data-analytics-certification-training-course/"><span class="g-mr-5">Data Analytics&nbsp; |</span></a></li>
+<li><span class="g-mr-5">SPARK&nbsp; |</span></li>
+<li><a href="https://www.excelr.com/data-science-course-training/"><span class="g-mr-5">Data Science&nbsp; </span></a></li>
+</ul>
+<br />
+<span class="g-mr-5">Project Management :&nbsp; </span>
+<ul class="list-inline d-inline">
+<li><a href="https://www.excelr.com/pmi-project-management-professional/"><span class="g-mr-5">PMP&reg;&nbsp; | </span></a></li>
+<li><a href="https://www.excelr.com/pmi-agile-certified-practitioner/"><span class="g-mr-5">PMI-ACP&reg;&nbsp; | </span></a></li>
+<li><a href="https://www.excelr.com/pmi-risk-management-professional/"><span class="g-mr-5">PMI-RMP&reg;&nbsp; | </span></a></li>
+<li><a href="https://www.excelr.com/prince2-certifications/"><span class="g-mr-5">PRINCE2&nbsp; | </span></a></li>
+<li><a href="https://www.excelr.com/pmi-pgmp/"><span class="g-mr-5">PgMP&nbsp; | </span></a></li>
+<li><a href="https://www.excelr.com/csm-certified-scrum-master/"><span class="g-mr-5">CSM&nbsp; | </span></a></li>
+</ul>
+<br />
+<span class="g-mr-5">IT Service Management :&nbsp;</span>
+<ul class="list-inline d-inline">
+<li><a href="https://www.excelr.com/itil-foundation/"><span class="g-mr-5">ITIL Foundation&nbsp; |</span></a></li>
+<li><a href="https://www.excelr.com/itil-intermediate/"><span class="g-mr-5">ITIL Intermediate&nbsp; |</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container-fluid no-padding">
+<div class="container disclaimer"><b>DISCLAIMER :</b><br>
+• PMI®, PMBOK® Guide, PMP®, PgMP®, CAPM®, PMI-RMP®, PMI-ACP® are registered marks of the Project Management Institute (PMI)®<br>
+• "ITIL®" is registered trademark of AXELOS, United Kingdom<br>
+• The Swirl logo TM is a Trade Mark of AXELOS<br>
+• PRINCE2® is a Registered Trade Mark of AXELOS, United Kingdom<br>
+• ServiceNow is a Registered Trade Mark of ServiceNow Inc.<br>
+• MongoDB®, Mongo are the registered trademarks of MongoDB, Inc.</div>
+</div>
+<div class="copyright col-md-12">
+<div class="col-md-12">
+<div class="">
+<div class="col-md-12">
+<div class="copyright__inner">©2019<a class="copyright__link" href="https://www.excelr.com/"> ExcelR</a> </div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<a class="mobile-view-call" title="Call Now" href="tel: 1800-212-2120">
+<img src="https://www.excelr.com/assets/media/general/calll.gif" alt="Call Us">
+</a>
+<a class="whatsapp-chat" title="Whats App" target="_blank" href="https://api.whatsapp.com/send?phone=917569740176"><img border="0" alt="whatsapp" src="https://www.excelr.com/assets/media/general/whatsapp_50.png" width="50" height="50">
+</a>
+<div class="footer_sticky_wrapper">
+<div class="footer_sticky_inside">
+<div class="container">
+<div class="footer_sticky_bar">
+<ul class="live_chat_div">
+<li class="callback_link"> <a class="how_it_works" href="#" data-toggle="modal" data-target="#dropquery-modal"><span class="aap_icon call_back_footer fa fa-support"></span>&nbsp;&nbsp;Drop a Query</a></li>
+<li class="callback_link"> <a class="sticky_request_call" href="#" data-toggle="modal" data-target="#dropquery-modal"> <span class="aap_icon call_back_footer fa fa-mobile"></span>&nbsp;&nbsp;Request a Callback </a> </li>
+<li class="call_no_stiky"><span class="aap_icon call_us_on fa fa-phone"></span>&nbsp;&nbsp;Toll Free <a href="tel:1800-212-2120" target="_blank">1800-212-2120</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header" align="center"> <img id="img_logo" src="https://www.excelr.com/assets/media/general/logo.png" alt="ExcelR">
+<button type="button" class="close" data-dismiss="modal">×</button>
+</div>
+
+<div id="div-forms">
+
+<form id="login-form" method="post" onsubmit="if (!window.__cfRLUnblockHandlers) return false; check_login();" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div class="modal-body">
+<span id="login_result" style="display:none; color:red;">Username and password mismatch.Please try again</span>
+<span id="login_res" style="display:none; color:green;">Login Successfully</span>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+<input id="login_email" name="login_email" class="form-control" type="text" placeholder="E-mail *">
+</div>
+<span id="ln_email_err" style="color:red;padding:0px"></span>
+</div>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_key" class="input-group-addon"><i class="fa fa-key"></i></span>
+<input id="login_password" name="login_password" class="form-control" type="password" placeholder="Password *">
+</div>
+<span id="lpwd_err" style="color:red;padding:0px"></span>
+</div>
+<div class="checkbox">
+<input id="checkbox1" type="checkbox" name="remember_me">
+<label for="checkbox1" class="remberme">
+Remember me
+</label>
+</div>
+</div>
+<div class="modal-footer">
+<div>
+<button type="submit" class="btn btn-grad-1 btn-block btn-singlecolor">Login</button>
+</div>
+<div>
+<button id="login_register_btn" type="button" class="btn-link">Register</button>
+<button id="login_lost_btn" type="button" class="btn-link">Lost Password?</button>
+</div>
+</div>
+</form>
+
+
+<form id="lost-form" style="display:none;" onsubmit="if (!window.__cfRLUnblockHandlers) return false; change_password()" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div class="modal-body">
+<span id="lost_result" style="display:none; color: red;">Invalid Email.</span>
+<span id="lost_res" style="display:none; color: green;">Password is sent to your registered email.</span>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="lost_mail" class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+<input id="lost_email" name="lost_email" class="form-control" type="text" placeholder="E-Mail *">
+</div>
+<span id="lost_err" style="color:red;"></span>
+</div>
+</div>
+<div class="modal-footer">
+<div>
+<button type="submit" class="btn btn-grad-1 btn-block btn-singlecolor">Send</button>
+</div>
+<div>
+<button id="lost_login_btn" type="button" class="btn-link">Log In</button>
+<button id="lost_register_btn" type="button" class="btn-link">Register</button>
+</div>
+</div>
+</form>
+
+
+<form id="register-form" style="display:none;" onsubmit="if (!window.__cfRLUnblockHandlers) return false; registration();" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div class="modal-body">
+<span id="register_result" style="display:none;color: green">Registered successfully</span>
+<span id="register_email_err" style="display:none;color: red">This email already exists!</span>
+<span id="register_err" style="display:none;color: red">Recaptcha mismatch.Please try again!</span>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="reg_user" class="input-group-addon"><i class="fa fa-user"></i></span>
+<input id="register_username" name="register_username" class="form-control" type="text" placeholder="Username *">
+</div>
+<span id="username_err" style="color:red;padding:0px"></span>
+</div>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="reg_email" class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+<input id="register_email" name="register_email" class="form-control" type="text" placeholder="E-Mail *">
+</div>
+<span id="remail_err" style="color:red;padding:0px"></span>
+</div>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="reg_mobile" class="input-group-addon"><i class="fa fa-phone"></i></span>
+<input id="register_mobile" name="register_mobile" class="form-control reg-mobile-no" type="tel" placeholder="Mobile No.*" maxlength="12" onkeypress="if (!window.__cfRLUnblockHandlers) return false; return isNumber(event)" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+</div>
+<span id="rmobile_err" style="color:red;padding:0px"></span>
+</div>
+<div class="mrbm-10">
+<div class="input-group">
+<span id="reg_key" class="input-group-addon"><i class="fa fa-key"></i></span>
+<input id="register_password" name="register_password" class="form-control" type="password" placeholder="Password *">
+</div>
+<span id="pwd_err" style="color:red;padding:0px"></span>
+</div>
+<div class="mrbm-10">
+<div class="input-group">
+<div class="g-recaptcha" data-sitekey="6LdxL3sUAAAAAHCfQyFyCVLKeWD9VStMpm3sPoQj"></div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<div>
+<img class="reg-ajax-loader" src="https://www.excelr.com/assets/media/general/loader.gif" alt="loader" style="width: 35px;display: none;">
+<button type="submit" class="btn btn-grad-1 btn-block btn-singlecolor reg-btn">Register</button>
+</div>
+<div>
+<button id="register_login_btn" type="button" class="btn-link">Log In</button>
+<button id="register_lost_btn" type="button" class="btn-link">Lost Password?</button>
+</div>
+</div>
+</form>
+
+</div>
+
+</div>
+</div>
+</div>
+<div class="modal fade frm-new" id="dropquery-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal-dialog">
+
+<div class="modal-content dropquery-modal-bg">
+<div class="modal-header no-padding">
+<button type="button" class="close" data-dismiss="modal" onclick="if (!window.__cfRLUnblockHandlers) return false; drop_query_close()" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">&times;</button>
+</div>
+<div class="modal-body no-padding">
+<div class="row">
+<div class="col-md-12">
+<div class="row">
+<div class="col-xs-12">
+<img src="https://www.excelr.com/assets/media/general/logo.png" alt="ExcelR" class="center-block img-responsive nm-lg">
+<img src="https://www.excelr.com/assets/media/general/drop-query.png" alt="Drop a Query" class="center-block img-responsive drop-hd-lg">
+
+<div id="div-forms">
+<div>
+<form class="ui-form" id="contactForm" method="post" onsubmit="if (!window.__cfRLUnblockHandlers) return false; drop_query()" data-cf-modified-4f8049cea8ff66ffeb30ed30-="">
+<div class="col-md-8 col-md-offset-2 webreg-form">
+<div class="row">
+<div class="col-xs-12">
+<div id="dresult" style="font-style:bold;color:#83f75e;display:none; font-weight:bold;"> Query Sent Successfully</div>
+<div class="col-md-12">
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><img src="https://www.excelr.com/assets/media/general/user.png" class="center-block" width="15" alt="User"></span>
+<input class="form-control" id="duser_name" type="text" name="duser_name" placeholder="Name *" />
+</div>
+<span id="dusername_err" style="color:red;padding:0px"></span>
+</div>
+</div>
+<div class="col-md-12">
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><img src="https://www.excelr.com/assets/media/general/mail.png" alt="Mail" class="center-block" width="15"></span>
+<input class="form-control" id="duser_email" type="text" name="duser_email" placeholder="Email *" />
+</div>
+<span id="demail_err" style="color:red;padding:0px"></span>
+</div>
+</div>
+<div class="col-md-12">
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><img src="https://www.excelr.com/assets/media/general/phone-volume.png" alt="Phone" class="center-block" width="15"></span>
+<input class="form-control dropqry-mobile-no" id="duser_mobile" type="tel" name="duser_mobile" placeholder="Mobile No.*" onkeypress="if (!window.__cfRLUnblockHandlers) return false; return isNumber(event)" maxlength="12" data-cf-modified-4f8049cea8ff66ffeb30ed30-="" />
+</div>
+<span id="dmobile_err" style="color:red;padding:0px"></span>
+</div>
+</div>
+<div class="col-md-12">
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><img src="https://www.excelr.com/assets/media/general/current-location.png" alt="Location" class="center-block" width="12"></span>
+<input class="form-control" id="duser_location" type="text" name="duser_location" placeholder="Location *" />
+</div>
+<span id="duserloc_err" style="color:red;padding:0px"></span>
+</div>
+</div>
+<div class="col-md-12">
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><img src="https://www.excelr.com/assets/media/general/download.png" alt="Download" class="center-block" width="17"></span>
+<input class="form-control" id="dcourse" type="text" name="dcourse" placeholder="Course *" />
+</div>
+<span id="dcourse_err" style="color:red;padding:0px"></span>
+</div>
+</div>
+<div class="col-md-12">
+<div class="mrbm-10">
+<div class="input-group">
+<span id="user_icon" class="input-group-addon"><img src="https://www.excelr.com/assets/media/general/img_302106.png" alt="User" class="center-block" width="17"></span>
+<textarea class="form-control" name="duser_message" id="duser_message" rows="1" placeholder="Message"></textarea>
+</div>
+</div>
+</div>
+<div class="col-md-12 text-center">
+<img class="dq-ajax-loader" src="https://www.excelr.com/assets/media/general/loader.gif" alt="loader" style="width: 35px;display: none;">
+<button id="add_query" type="submit" class="btn drop-qry-btn webinar-reg-submbtn dq-btn">Submit</button>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://www.excelr.com/assets/css/intlTelInput.css?v=1.0.1">
+<script src="https://www.excelr.com/assets/libs/jquery-1.12.4.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/intlTelInput.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+        $("#luser_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c1 = (resp) ? resp : "";
+					 callback(c1);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#duser_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c2 = (resp) ? resp : "";
+					 callback(c2);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#register_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#register_mobile1").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });        
+		$("#mobile_no").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#user_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#quser_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#enq_user_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+		$("#enq_user_mobile1").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c3 = (resp) ? resp : "";
+					 callback(c3);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });
+        $("#webinar_mobile").intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                jQuery.get('https://www.excelr.com/home/getipcountrycode', function() {}, "text").always(function(resp) {
+                    var c1 = (resp) ? resp : "";
+					 callback(c1);
+                });
+            },
+            utilsScript: "js/utils.js" 
+        });        
+    </script>
+<script src="https://www.excelr.com/assets/libs/jquery-migrate-1.2.1.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src='https://www.excelr.com/assets/js/bootstrap-select.min.js' type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/libs/bootstrap/bootstrap.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/js/jquery.validate.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/additional-methods.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/switcher/js/dmss.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/owl-carousel/owl.carousel.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/plugins/bxslider/jquery.bxslider.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/magnific-popup/jquery.magnific-popup.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/headers/slidebar.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/plugins/headers/header.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/isotope/isotope.pkgd.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/plugins/isotope/imagesLoaded.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/rendro-easy-pie-chart/jquery.easypiechart.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/plugins/rendro-easy-pie-chart/waypoints.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/plugins/scrollreveal/scrollreveal.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/plugins/datatables/jquery.dataTables.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/plugins/datatables/dataTables.bootstrap4.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+
+<script src="https://www.excelr.com/plugins/datatables/dataTables.responsive.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/plugins/datatables/responsive.bootstrap4.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/js/custom.js?v=1.0.2" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/jquery.redirect.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/mediaelement-and-player.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/excelrnav.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/jquery-ui.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/jssocials.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/customscrollbar.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/jquery.form.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+
+<script src="https://www.excelr.com/assets/plugins/animate/wow.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/plugins/animate/jquery.shuffleLetters.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/plugins/animate/jquery.scrollme.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/video.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/ammap.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script src="https://www.excelr.com/assets/js/worldLow.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/admin/plugins/timepicker/bootstrap-timepicker.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src="https://www.excelr.com/assets/js/responsive.min.js" type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+
+<script src='https://www.google.com/recaptcha/api.js' type="4f8049cea8ff66ffeb30ed30-text/javascript"></script>
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+  document.getElementById('add_query').addEventListener('click', function(){
+    fbq('track', 'CompleteRegistration');
+  });
+</script>
+<script type="4f8049cea8ff66ffeb30ed30-text/javascript">
+$(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip(); 
+      $('body').append('<div id="toTop"><i class="mdi mdi-apple-keyboard-control"></i></div>');
+        $(window).scroll(function () {
+			if ($(this).scrollTop() != 0) {
+				$('#toTop').fadeIn();
+			} else {
+				$('#toTop').fadeOut();
+			}
+		}); 
+    $('#toTop').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
+
+	 
+	
+});
+jQuery(document).ready(function($) {
+	jQuery('.excelrnav').excelrnav({
+		theme: 'light'
+	});
+});
+
+$(window).load(function(){
+		var timer = setTimeout(function() {
+			$('#dropquery-modal').modal('show');
+	}, 60000);
+		//setTimeout("openNav()", 30000); // after 30 secs
+	//setTimeout("closeNav()", 40000);
+});
+
+var BASEURL = "https://www.excelr.com/";
+$( ".login-btn" ).click(function() {
+  $('#login-form').show();
+  $('#lost-form').hide();
+  $('#change-password-form').hide();
+  $('#register-form').hide();
+});
+$( "#register-modal" ).click(function() {
+  $('#register-form').show();
+  $('#lost-form').hide();
+  $('#change-password-form').hide();
+  $('#login-form').hide();
+});
+$("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+    e.preventDefault();
+    $(this).siblings('a.active').removeClass("active");
+    $(this).addClass("active");
+    var index = $(this).index();
+    $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+    $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+});	
+	
+function drop_query_close() {
+	event.preventDefault();
+	$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/drop_set_session"
+	}); 
+}
+
+$(window).scroll(function() {
+var scroll = $(window).scrollTop();
+if (scroll >= 50) {
+    $(".footer_sticky_inside").addClass("sticky_visible");
+} else {
+    $(".footer_sticky_inside").removeClass("sticky_visible");
+}
+});
+$("#course-video").on('hidden.bs.modal', function (e) {
+    $("#course-video iframe").attr("src", $("#course-video iframe").attr("src"));
+});
+$("#banner2-video").on('hidden.bs.modal', function (e) {
+    $("#banner2-video iframe").attr("src", $("#banner2-video iframe").attr("src"));
+});
+$('.datepicker').datepicker({
+	format: 'dd-mm-yyyy',
+	startDate: '22-05-2019',
+	autoclose: true,
+});
+
+$("#shareRoundIcons").jsSocials({
+    showLabel: false,
+    showCount: false,
+    shares: ["facebook", "twitter", "googleplus", "linkedin"]
+});
+
+$(".show-more a").on("click", function() {
+    var $link = $(this);
+    var $content = $link.parent().prev("div.text-content");
+	console.log($content);
+    var linkText = $link.text();
+    
+    switchClasses($content);
+
+    $link.text(getShowLinkText(linkText));
+    
+    return false;
+});
+
+$(function() { 
+		$("#course_search").autocomplete({
+			source: function(request, response) {
+				$.getJSON(
+					"https://www.excelr.com/home/get_course_search/",
+					{ coursename:request.term, geo_city: 'Bangalore'}, 
+					response
+				);
+			},
+			select: function (event, ui) {
+				var elem = $(event.originalEvent.toElement);
+				if (elem.hasClass('ac-item-a')) {
+					var url = elem.attr('data-url');
+					event.preventDefault();
+					window.open(url, '_blank ');
+				}
+			}
+		}).data("ui-autocomplete")._renderItem = function (ul, item) {
+		return $("<li></li>")
+			.data("item.autocomplete", item)
+			.append('<a href="https://www.excelr.com/'+item.base_url+'" class="ac-item-a" data-url="https://www.excelr.com/'+item.base_url+'">' + item.value + '</a>')
+			.appendTo(ul);
+		};
+	});
+
+
+function switchClasses($content){
+    if($content.hasClass("short-text")){  
+        $content.switchClass("short-text", "full-text", 400);
+    } else {
+        $content.switchClass("full-text", "short-text", 400);
+    }
+}
+
+function getShowLinkText(currentText){
+    var newText = '';
+    
+    if (currentText.toUpperCase() === "SHOW MORE") {
+        newText = "Show less";
+    } else {
+        newText = "Show more";
+    }
+    
+    return newText;
+}
+
+
+function course_letusknow() {
+	event.preventDefault();
+	var country_code = $("#luser_mobile").intlTelInput("getSelectedCountryData").dialCode;
+	var user_name = $("#luser_name").val();
+	var user_email = $("#luser_email").val();
+	var user_mobile = $("#luser_mobile").val();
+	var course_id = $("#lcourse_id").val();
+	var preferred_date = $("#lpreferred_date").val();
+	var user_course = $("#luser_course").val();
+	var user_location = $("#luser_location").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{1,63}@(?:[A-Za-z0-9-]{3,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(user_email);
+	var e1 = user_email.split("@");
+	var e2 = e1[0];
+	var msg = 0;
+	
+	if(user_name == ''){
+		$("#lname_err").html('Name is required');
+		$("#luser_name").css('border-color', 'red');
+		msg = 1;
+	}else if($.isNumeric(user_name)){
+		$('#lname_err').html('Name must be some alphabets');
+		$('#luser_name').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$("#luser_name").css('border-color', '#ddd');
+		$("#lname_err").hide();
+		// msg = 0;
+	}if(user_mobile == ''){
+		$("#lmobile_err").html('Mobile No. is required');
+		$("#luser_mobile").css('border-color', 'red');
+		msg = 1;
+	}else if(user_mobile.length<10){
+		$("#luser_mobile").css('border-color', 'red');
+		$('#lmobile_err').html('Mobile No. must be 10 to 12 digits');
+		msg = 1;
+	}else if (user_mobile.match(/^0+$/)){
+		$('#lmobile_err').html('Mobile No. is Invalid');
+		$("#luser_mobile").css('border-color', 'red');
+		msg = 1;
+	}else{
+		$("#luser_mobile").css('border-color', '#ddd');
+		$("#lmobile_err").hide();
+		// msg = 0;
+	}if(user_course == ''){
+		$("#lcourse_err").html('Course is required');
+		$("#luser_course").css('border-color', 'red');
+		msg = 1;
+	}else if($.isNumeric(user_course)){
+		$("#lcourse_err").html('Course is required');
+		$("#luser_course").css('border-color', 'red');
+		msg = 1;
+	}else{
+		$("#luser_course").css('border-color', '#ddd');
+		$("#lcourse_err").hide();
+		// msg = 0;
+	}if(user_email == ''){
+		$("#luser_email").css('border-color', 'red');
+		$("#lemail_err").html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#luser_email').css('border-color', 'red');
+		$('#lemail_err').html('Email should have some alphabets');
+		msg = 1;
+	}else if(!validEmail || validEmail == false) {
+        $('#lemail_err').html('Invalid Email');
+		$('#luser_email').css('border-color', 'red');
+		 msg = 1;
+	}else{
+		$("#luser_email").css('border-color', '#ddd');
+		$('#lemail_err').hide();
+		// msg = 0;
+	}if(preferred_date == ''){
+		$("#lpreferred_date").css('border-color', 'red');
+		$('#lpreferred_date_err').html('Date is required');
+		msg = 1;
+	}else{
+		$("#lpreferred_date").css('border-color', '#ddd');
+		$('#lpreferred_date_err').hide();
+		// msg = 0;
+	}
+	if(msg == 1){
+		return false;
+	}else{
+    	$('.letusknow-ajax-loader').show();
+    	$(".letusknow-btn").attr("disabled", true);
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/letusknow",
+		dataType: 'json',
+		data: {user_name: user_name, user_email: user_email, user_mobile: user_mobile, user_course: user_course, user_location:user_location, preferred_date: preferred_date,country_code:country_code},
+		success: function(data) {
+			/*$("#letus-result").show();
+			$("#luser_name").val('');
+			$("#luser_email").val('');
+			$("#luser_mobile").val('');
+			$("#lpreferred_date").val('');
+			$("#luser_course").val('');
+			$("#luser_location").val('');
+			setTimeout(function(){
+				$("#letus-result").hide();
+			}, 5000);*/
+    		$('.letusknow-ajax-loader').hide();
+    		$(".letusknow-btn").attr("disabled", false);					
+			window.location.href="https://www.excelr.com/thank-you";
+		}
+	}); 
+	}
+}
+
+function course_drop_query() {
+	event.preventDefault();
+	var user_name = $("#quser_name").val();
+	var user_email = $("#quser_email").val();
+	var user_mobile = $("#quser_mobile").val();
+	var course_id = $("#qcourse_id").val();
+	    $('.drop-ajax-loader').show();
+    	$(".drop-query-btn").attr("disabled", true);
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/add_query",
+		dataType: 'json',
+		data: {user_name: user_name, user_email: user_email, user_mobile: user_mobile},
+		success: function(data) {
+			/*$("#query-result").show();
+			$("#quser_name").val('');
+			$("#quser_email").val('');
+			$("#quser_mobile").val('');
+			setTimeout(function(){
+				$("#query-result").hide();
+			}, 5000);*/
+    		$('.drop-ajax-loader').hide();
+    		$(".drop-query-btn").attr("disabled", false);			
+			window.location.href="https://www.excelr.com/thank-you";
+		}
+	}); 
+}
+function free_course_query(){
+	var country_code = $("#duser_mobile").intlTelInput("getSelectedCountryData").dialCode;
+	var user_name = $("#duser_name").val();
+	var user_email = $("#duser_email").val();
+	var user_mobile = $("#duser_mobile").val();
+	var course = $("#dcourse").val();
+	var user_location = $("#duser_location").val();
+	var user_course = $("#duser_course").val();
+	var user_message = $("#duser_message").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{1,63}@(?:[A-Za-z0-9-]{3,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(user_email);
+	var e1 = user_email.split("@");
+	var e2 = e1[0];
+	
+	var msg = 0;
+	
+	if(user_name == ''){
+		$('#dusername_err').html('Name is required');
+		$('#duser_name').css('border-color', 'red');
+		msg = 1;
+	}else if($.isNumeric(user_name)){
+		$('#dusername_err').html('Name must be some alphabets');
+		$('#duser_name').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#dusername_err').hide();
+		$('#duser_name').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_mobile == ''){
+		$('#dmobile_err').html('Mobile No. is required');
+		$('#duser_mobile').css('border-color', 'red');
+		msg = 1;
+	}else if(user_mobile.length<10){
+		$('#dmobile_err').html('Mobile No. must be 10 to 12 digits');
+		$('#duser_mobile').css('border-color', 'red');
+		msg = 1;
+	}else if(user_mobile.match(/^0+$/)){
+		$('#dmobile_err').html('Invalid Mobile No.');
+		$('#duser_mobile').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#dmobile_err').hide();
+		$('#duser_mobile').css('border-color', '#ddd');
+		// msg = 0;
+	}if(course == '' || course == null){
+		$('#dcourse_err').html('Course is required');
+		$('#dcourse').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#dcourse_err').hide();
+		$('#dcourse').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_email == ''){
+		$('#duser_email').css('border-color', 'red');
+		$('#demail_err').html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#duser_email').css('border-color', 'red');
+		$('#demail_err').html('Email should have some alphabets');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#duser_email').css('border-color', 'red');
+		$('#demail_err').html('Invalid Email');
+		 msg = 1;
+	}else{
+		$('#demail_err').hide();
+		$('#duser_email').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_location == ''){
+		$('#duser_location').css('border-color', 'red');
+		$('#duserloc_err').html('Location is required');
+		msg = 1;
+	}else{
+		$('#duserloc_err').hide();
+		$('#duser_location').css('border-color', '#ddd');
+		// msg = 0;
+	}
+	if(msg==1)
+		return false;
+	else {
+        $('.fcq-ajax-loader').show();
+        $(".fcq-btn").attr("disabled", true);			    
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/free_course_query",
+		dataType: 'json',
+		data: {user_name: user_name, user_email: user_email, user_mobile: user_mobile, course:course,user_location: user_location, user_course: user_course, user_message: user_message,country_code:country_code},
+		success: function(data) {
+			/* $("#dresult").show();
+			$("#duser_name").val('');
+			$("#duser_email").val('');
+			$("#duser_mobile").val('');
+			$("#duser_location").val('');
+			$("#duser_course").val('');
+			$("#duser_message").val('');
+			setTimeout(function(){
+				$("#dresult").hide();
+			}, 5000); */
+			if(data == 1){
+				$("#dcourse_err").show();
+				$("#dcourse_err").html('Please select any 2 courses');
+			}
+			else if(data == 2){
+        		$('.fcq-ajax-loader').hide();
+        		$(".fcq-btn").attr("disabled", false);				    
+				window.location.href="https://www.excelr.com/thank-you";
+		}
+		}
+	}); 
+	} 
+}
+function drop_query() {
+	var country_code = $("#duser_mobile").intlTelInput("getSelectedCountryData").dialCode;
+	var user_name = $("#duser_name").val();
+	var user_email = $("#duser_email").val();
+	var user_mobile = $("#duser_mobile").val();
+	var course = $("#dcourse").val();
+	var user_location = $("#duser_location").val();
+	var user_course = $("#duser_course").val();
+	var user_message = $("#duser_message").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{1,63}@(?:[A-Za-z0-9-]{3,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(user_email);
+	var e1 = user_email.split("@");
+	var e2 = e1[0];
+	
+	var msg = 0;
+	
+	if(user_name == ''){
+		$('#dusername_err').html('Name is required');
+		$('#duser_name').css('border-color', 'red');
+		msg = 1;
+	}else if($.isNumeric(user_name)){
+		$('#dusername_err').html('Name must be some alphabets');
+		$('#duser_name').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#dusername_err').hide();
+		$('#duser_name').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_mobile == ''){
+		$('#dmobile_err').html('Mobile No. is required');
+		$('#duser_mobile').css('border-color', 'red');
+		msg = 1;
+	}else if(user_mobile.length<10){
+		$('#dmobile_err').html('Mobile No. must be 10 to 12 digits');
+		$('#duser_mobile').css('border-color', 'red');
+		msg = 1;
+	}else if(user_mobile.match(/^0+$/)){
+		$('#dmobile_err').html('Invalid Mobile No.');
+		$('#duser_mobile').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#dmobile_err').hide();
+		$('#duser_mobile').css('border-color', '#ddd');
+		// msg = 0;
+	}if(course == ''){
+		$('#dcourse_err').html('Course is required');
+		$('#dcourse').css('border-color', 'red');
+		msg = 1;
+	}else if($.isNumeric(course)){
+		$('#dcourse_err').html('Course name must be some alphabets');
+		$('#dcourse').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#dcourse_err').hide();
+		$('#dcourse').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_email == ''){
+		$('#duser_email').css('border-color', 'red');
+		$('#demail_err').html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#duser_email').css('border-color', 'red');
+		$('#demail_err').html('Email should have some alphabets');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#duser_email').css('border-color', 'red');
+		$('#demail_err').html('Invalid Email');
+		 msg = 1;
+	}else{
+		$('#demail_err').hide();
+		$('#duser_email').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_location == ''){
+		$('#duser_location').css('border-color', 'red');
+		$('#duserloc_err').html('Location is required');
+		msg = 1;
+	}else{
+		$('#duserloc_err').hide();
+		$('#duser_location').css('border-color', '#ddd');
+		// msg = 0;
+	}
+	if(msg==1)
+		return false;
+	else {
+        $('.dq-ajax-loader').show();
+        $(".dq-btn").attr("disabled", true);		    
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/drop_query",
+		dataType: 'json',
+		data: {user_name: user_name, user_email: user_email, user_mobile: user_mobile, course:course,user_location: user_location, user_course: user_course, user_message: user_message,country_code:country_code},
+		success: function(data) {
+			/*$("#dresult").show();
+			$("#duser_name").val('');
+			$("#duser_email").val('');
+			$("#duser_mobile").val('');
+			$("#duser_location").val('');
+			$("#duser_course").val('');
+			$("#duser_message").val('');
+			setTimeout(function(){
+				$("#dresult").hide();
+			}, 5000);*/
+        	$('.dq-ajax-loader').hide();
+        	$(".dq-btn").attr("disabled", false);				
+			window.location.href="https://www.excelr.com/thank-you";
+		}
+	}); 
+	} 
+}
+/*function webinar_register() {
+	event.preventDefault();
+	var webinar_id = $("#webinar_id").val();
+	var user_name = $("#webinar_name").val();
+	var user_email = $("#webinar_email").val();
+	var user_mobile = $("#webinar_mobile").val();
+	var user_location = $("#webinar_location").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{1,63}@(?:[A-Za-z0-9-]{3,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(user_email);
+	var e1 = user_email.split("@");
+	var e2 = e1[0];
+	var msg = 0;
+	
+	if(user_name == ''){
+		$('#wusername_err').html('Name is required');
+		$('#webinar_name').css('border-color', 'red');
+		msg = 1;
+	}else if($.isNumeric(user_name)){
+		$('#wusername_err').html('Name must be some alphabets');
+		$('#webinar_name').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#wusername_err').hide();
+		$('#webinar_name').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_mobile == ''){
+		$('#wmob_err').html('Mobile No. is required');
+		$('#webinar_mobile').css('border-color', 'red');
+		msg = 1;
+	}else if(user_mobile.length<10){
+		$('#wmob_err').html('Mobile No. must be 10 to 12 digits');
+		$('#webinar_mobile').css('border-color', 'red');
+		msg = 1;
+	}else if (user_mobile.match(/^0+$/)){
+		$('#wmob_err').html('Invalid Mobile No.');
+		$('#webinar_mobile').css('border-color', 'red');
+		msg = 1;
+	}else{
+		$('#wmob_err').hide();
+		$('#webinar_mobile').css('border-color', '#ddd');
+		// msg = 0;
+	}if(user_email == ''){
+		$('#webinar_email').css('border-color', 'red');
+		$('#wemail_err').html('Email is required');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$('#webinar_email').css('border-color', 'red');
+		$('#wemail_err').html('Email should have some alphabets');
+		msg = 1;
+	}else if(e2.length<3){
+		$('#webinar_email').css('border-color', 'red');
+		$('#wemail_err').html('Invalid Email');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#webinar_email').css('border-color', 'red');
+		$('#wemail_err').html('Invalid Email');
+		 msg = 1;
+	}else{
+		$('#wemail_err').hide();
+		$('#webinar_email').css('border-color', '#ddd');
+		// msg = 0;
+	}
+	if(msg == 1)
+		return false;
+	else {
+		$.ajax({
+		type: "POST",
+		url: "home/webinar_register",
+		dataType: 'json',
+		data: {webinar_id: webinar_id, user_name: user_name, user_email: user_email, user_mobile: user_mobile, user_location: user_location},
+		success: function(data) {
+			$("#webinar_result").show();
+			$("#webinar_name").val('');
+			$("#webinar_email").val('');
+			$("#webinar_mobile").val('');
+			$("#webinar_location").val('');
+			setTimeout(function(){
+				$("#webinar_result").hide();
+			}, 5000);
+			//window.location.href="thank-you";
+		}
+	}); 
+	}
+}*/
+$("input[name='portion_selection']:radio").change(function() {
+      $("#portion_one").toggle($(this).val() == "button_one");
+      $("#portion_two").toggle($(this).val() == "button_two"); 
+      $("#portion_three").toggle($(this).val() == "button_three"); 
+	  $("#card-one").toggle($(this).val() == "card-one");
+      $("#card-two").toggle($(this).val() == "card-two"); 
+      $("#card-three").toggle($(this).val() == "card-three");
+});
+
+$('.webinar-searchinput').on('keyup',function(){
+	var searchTerm = $(this).val().toLowerCase();
+	$('#webinar-search #search_webinar_name').each(function(){
+		var lineStr = $(this).find("h3#search-webinar-title").text().toLowerCase();
+		console.log(lineStr.indexOf(searchTerm));
+		if(lineStr.indexOf(searchTerm) === -1){
+			$(this).hide();
+		}else{
+			console.log(lineStr.indexOf(searchTerm));
+			$(this).show();
+		}
+	});
+});
+function registration(){
+	var country_code = $("#register_mobile").intlTelInput("getSelectedCountryData").dialCode;
+	var username = $("#register_username").val();
+	var email = $("#register_email").val();
+	var mobile = $("#register_mobile").val();
+	var password = $("#register_password").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{1,63}@(?:[A-Za-z0-9-]{3,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(email);
+	var e1 = email.split("@");
+	var e2 = e1[0];
+	var msg = 0;
+	if(username == ''){
+		$("#register_username").css('border-color','red');
+		$("#reg_user").css('border-color','red');
+		$('#username_err').html('Name is required');
+		msg = 1;
+	}else if($.isNumeric(username)){
+		$("#register_username").css('border-color','red');
+		$("#reg_user").css('border-color','red');
+		$('#username_err').html('Name must be some alphabets');
+		msg = 1;
+	}else{
+		$("#register_username").css('border-color','#ddd');
+		$("#reg_user").css('border-color','#ddd');
+		$('#username_err').hide();
+		// msg = 0;
+	}if(mobile == ''){
+		$('#rmobile_err').html('Mobile No. is required');
+		$("#register_mobile").css('border-color','red');
+		$("#reg_mobile").css('border-color','red');
+		msg = 1;
+	}else if(mobile.length<10){
+		$('#rmobile_err').html('Mobile No. must be 10 to 12 digits');
+		$("#reg_mobile").css('border-color','red');
+		$("#register_mobile").css('border-color','red');
+		msg = 1;
+	}else if (mobile.match(/^0+$/)){
+		$('#rmobile_err').html('Invalid Mobile No.');
+		$('#reg_mobile').css('border-color', 'red');
+		$("#register_mobile").css('border-color','red');
+		msg = 1;
+	}else{
+		$("#register_mobile").css('border-color','#ddd');
+		$("#reg_mobile").css('border-color','#ddd');
+		$('#rmobile_err').hide();
+		// msg = 0;
+	}if(email == ''){
+		$('#remail_err').html('Email is required');
+		$("#register_email").css('border-color','red');
+		$("#reg_email").css('border-color','red');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$("#register_email").css('border-color','red');
+		$("#reg_email").css('border-color','red');
+		$('#remail_err').html('Email should have some alphabets');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#remail_err').html('Enter a valid email');
+		$("#register_email").css('border-color','red');
+		$("#reg_email").css('border-color','red');
+		 msg = 1;
+	}else if(e2.length<3){
+		$('#remail_err').html('Invalid email');
+		$("#register_email").css('border-color','red');
+		$("#reg_email").css('border-color','red');
+		 msg = 1;
+	}else{
+		$("#register_email").css('border-color','#ddd');
+		$("#reg_email").css('border-color','#ddd');
+		$('#remail_err').hide();
+		// msg = 0;
+	}if(password == ''){
+		$("#register_password").css('border-color','red');
+		$("#reg_key").css('border-color','red');
+		$('#pwd_err').html('Password is required');
+		msg = 1;
+	}else if(password.length<5){
+		$("#register_password").css('border-color','red');
+		$("#reg_key").css('border-color','red');
+		$('#pwd_err').html('Password must be minimum 5 characters');
+		msg = 1;
+	}else{
+		$("#register_password").css('border-color','#ddd');
+		$("#reg_key").css('border-color','#ddd');
+		$('#pwd_err').hide();
+		// msg = 0;
+	}
+	if (msg==1)	{
+		return false;
+	}
+	else {
+		var reg_data = $("#register-form").serialize();
+        $('.reg-ajax-loader').show();
+        $(".reg-btn").attr("disabled", true);				
+		$.ajax({
+			type: "POST",
+			url: "https://www.excelr.com/home/user_registration",
+			dataType: 'json',
+			// data: {username: username, email: email, mobile: mobile, password: password},
+			data: reg_data + '&country_code=' + country_code,
+			success: function(data) {
+				if(data==1){
+					/*$("#register_result").show();
+					$("#register_email_err").hide();
+					$("#register_err").hide();
+					$("#register_username").val('');
+					$("#register_email").val('');
+					$("#register_password").val('');
+					$("#register_mobile").val('');
+					location.reload();*/
+                	$('.reg-ajax-loader').hide();
+                	$(".reg-btn").attr("disabled", false);							
+					window.location.href="https://www.excelr.com/thank-you";
+				}else if(data==2){ 
+					$("#register_result").hide();
+					$("#register_email_err").show();
+					$("#register_err").hide();
+					$("#register_username").val('');
+					$("#register_password").val('');
+					$("#register_mobile").val('');
+				}else{
+					$("#register_result").hide();
+					$("#register_email_err").hide();
+					$("#register_err").show();
+					$("#register_username").val('');
+					$("#register_password").val('');
+					$("#register_email").val('');
+					$("#register_mobile").val('');
+				}
+			}
+		});
+	}
+}
+function registration1(){
+    var country_code = $("#register_mobile").intlTelInput("getSelectedCountryData").dialCode;
+	var username = $("#register_username1").val();
+	var email = $("#register_email1").val();
+	var mobile = $("#register_mobile1").val();
+	var password = $("#register_password1").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{1,63}@(?:[A-Za-z0-9-]{3,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(email);
+	var e1 = email.split("@");
+	var e2 = e1[0];
+	var msg = 0;
+	if(username == ''){
+		$("#register_username1").css('border-color','red');
+		$("#reg_user1").css('border-color','red');
+		$('#username_err1').html('Name is required');
+		msg = 1;
+	}else if($.isNumeric(username)){
+		$("#register_username1").css('border-color','red');
+		$("#reg_user1").css('border-color','red');
+		$('#username_err1').html('Name must be some alphabets');
+		msg = 1;
+	}else{
+		$("#register_username1").css('border-color','#ddd');
+		$("#reg_user1").css('border-color','#ddd');
+		$('#username_err1').hide();
+		// msg = 0;
+	}if(mobile == ''){
+		$('#rmobile_err1').html('Mobile No. is required');
+		$("#register_mobile1").css('border-color','red');
+		$("#reg_mobile1").css('border-color','red');
+		msg = 1;
+	}else if(mobile.length<10){
+		$('#rmobile_err1').html('Mobile No. must be 10 to 12 digits');
+		$("#reg_mobile1").css('border-color','red');
+		$("#register_mobile1").css('border-color','red');
+		msg = 1;
+	}else if (mobile.match(/^0+$/)){
+		$('#rmobile_err1').html('Invalid Mobile No.');
+		$('#reg_mobile1').css('border-color', 'red');
+		$("#register_mobile1").css('border-color','red');
+		msg = 1;
+	}else{
+		$("#register_mobile1").css('border-color','#ddd');
+		$("#reg_mobile1").css('border-color','#ddd');
+		$('#rmobile_err1').hide();
+		// msg = 0;
+	}if(email == ''){
+		$('#remail_err1').html('Email is required');
+		$("#register_email1").css('border-color','red');
+		$("#reg_email1").css('border-color','red');
+		msg = 1;
+	}else if($.isNumeric(e2)){
+		$("#register_email1").css('border-color','red');
+		$("#reg_email1").css('border-color','red');
+		$('#remail_err1').html('Email should have some alphabets');
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#remail_err1').html('Enter a valid email');
+		$("#register_email1").css('border-color','red');
+		$("#reg_email1").css('border-color','red');
+		 msg = 1;
+	}else if(e2.length<3){
+		$('#remail_err1').html('Invalid email');
+		$("#register_email1").css('border-color','red');
+		$("#reg_email1").css('border-color','red');
+		 msg = 1;
+	}else{
+		$("#register_email1").css('border-color','#ddd');
+		$("#reg_email1").css('border-color','#ddd');
+		$('#remail_err1').hide();
+		// msg = 0;
+	}if(password == ''){
+		$("#register_password1").css('border-color','red');
+		$("#reg_key1").css('border-color','red');
+		$('#pwd_err1').html('Password is required');
+		msg = 1;
+	}else if(password.length<5){
+		$("#register_password1").css('border-color','red');
+		$("#reg_key1").css('border-color','red');
+		$('#pwd_err1').html('Password must be minimum 5 characters');
+		msg = 1;
+	}else{
+		$("#register_password1").css('border-color','#ddd');
+		$("#reg_key1").css('border-color','#ddd');
+		$('#pwd_err1').hide();
+		// msg = 0;
+	}
+	if (msg==1)	{
+		return false;
+	}
+	else {
+		var reg_data = $("#register-form1").serialize();
+	    $('.quiz-reg-ajax-loader').show();
+         $(".quiz-reg-btn").attr("disabled", true);		
+		$.ajax({
+			type: "POST",
+			url: "https://www.excelr.com/home/user_registration",
+			dataType: 'json',
+			// data: {username: username, email: email, mobile: mobile, password: password},
+			data: reg_data + '&country_code=' + country_code,
+			success: function(data) {
+				if(data==1){
+					$("#register_result1").show();
+					$("#register_email_err1").hide();
+					$("#register_err1").hide();
+					$("#register_username1").val('');
+					$("#register_email1").val('');
+					$("#register_password1").val('');
+					$("#register_mobile1").val('');
+					location.reload();
+    		    	$('.quiz-reg-ajax-loader').hide();
+    			    $(".quiz-reg-btn").attr("disabled", false);					
+					//window.location.href="https://www.excelr.com/thank-you";
+				}else if(data==2){ 
+					$("#register_result1").hide();
+					$("#register_email_err1").show();
+					$("#register_err1").hide();
+					$("#register_username1").val('');
+					$("#register_password1").val('');
+					$("#register_mobile1").val('');
+				}else{
+					$("#register_result1").hide();
+					$("#register_email_err1").hide();
+					$("#register_err1").show();
+					$("#register_username1").val('');
+					$("#register_password1").val('');
+					$("#register_email1").val('');
+					$("#register_mobile1").val('');
+				}
+			}
+		});
+	}
+}
+function check_login(){
+	var email = $("#login_email").val();
+	var password = $("#login_password").val();
+    var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{2,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(email); 
+     var msg = 0;
+	if(email == ''){
+		$("#login_email").css('border-color','red');
+		$("#user_icon").css('border-color','red');
+		$('#ln_email_err').html('Email is required');
+		msg = 1;
+	} if (!validEmail || validEmail == false) {
+		$("#login_email").css('border-color','red');
+        $("#user_icon").css('border-color','red');
+		$('#ln_email_err').html('Enter a valid email');
+		 msg = 1;
+	}else{
+		$("#login_email").css('border-color','#ddd');
+		$("#user_icon").css('border-color','#ddd');
+		$('#ln_email_err').hide();
+		msg = 0;
+	}if(password == ''){
+		$("#user_key").css('border-color','red');
+		$("#login_password").css('border-color','red');
+		$('#lpwd_err').html('Password is required');
+		msg = 1;
+	}else{
+		$("#user_key").css('border-color','#ddd');
+		$("#login_password").css('border-color','#ddd');
+		$('#lpwd_err').hide();
+		msg = 0;
+	}
+	if(msg==0 && validEmail==true){
+		$.ajax({
+			type: "POST",
+			url: "https://www.excelr.com/home/check_login",
+			dataType: 'json',
+			data: {email: email, password: password},
+			success: function(data) {
+				if(data == 1){
+					location.reload();
+					// $("#login_result").hide();
+					// $("#login_res").show();
+					// $("#login_email").val('');
+					// $("#login_password").val('');
+					// setTimeout(function(){
+						// $("#login_res").hide();
+					// }, 5000); 
+				}else {
+					$("#login_res").hide();
+					$("#login_result").show();
+					$("#login_email").val('');
+					$("#login_password").val('');
+					setTimeout(function(){
+						$("#login_result").hide();
+					}, 5000); 
+				}
+			}
+		}); 
+	}
+}
+function change_password(){
+	event.preventDefault();
+	var email = $("#lost_email").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{2,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(email); 
+     var msg = 0;
+	if(email == ''){
+		$('#lost_email').css('border-color','red');
+		$('#lost_mail').css('border-color','red');
+		$('#lost_err').html('Email is required');
+		msg = 1;
+	} if (!validEmail || validEmail == false) {
+		$('#lost_email').css('border-color','red');
+		$('#lost_mail').css('border-color','red');
+        $('#lost_err').html('Enter a valid email');
+		 msg = 1;
+	}else{
+		$('#lost_email').css('border-color','#ddd');
+		$('#lost_mail').css('border-color','#ddd');
+		$('#lost_err').hide();
+		msg = 0;
+	}
+	if(msg==0 && validEmail==true){
+		$.ajax({
+			type: "POST",
+			url: "https://www.excelr.com/home/lost_pwd",
+			dataType: 'json',
+			data: {email: email},
+			success: function(data) {
+				 if(data == 0){
+					$("#lost_result").show();
+					$("#lost_res").hide();
+					$("#lost_email").val('');
+					setTimeout(function(){
+						$("#lost_result").hide();
+					}, 5000); 
+				}else {
+					$("#lost_res").show();
+					$("#lost_result").hide();
+					$("#lost_email").val('');
+					setTimeout(function(){
+						$("#lost_res").hide();
+					}, 5000); 
+				} 
+				}
+			});
+	}
+}
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+  }
+ $(function() {
+	if (localStorage.chkbx && localStorage.chkbx != '') {
+        $('#checkbox1').attr('checked', 'checked');
+        $('#login_email').val(localStorage.usrname);
+        $('#login_password').val(localStorage.pass);
+    } else {
+        $('#checkbox1').removeAttr('checked');
+        $('#login_email').val('');
+        $('#login_password').val('');
+    }
+
+    $('#checkbox1').click(function() {
+
+        if ($('#checkbox1').is(':checked')) {
+            // save username and password
+            localStorage.usrname = $('#login_email').val();
+            localStorage.pass = $('#login_password').val();
+            localStorage.chkbx = $('#checkbox1').val();
+        } else {
+            localStorage.usrname = '';
+            localStorage.pass = '';
+            localStorage.chkbx = '';
+        }
+    });
+}); 
+
+<!--Start of Zendesk Chat Script-->
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="https://v2.zopim.com/?2AF1WnASzaoAh50LDaudQ2wKP0TWjvCW";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+<!--End of Zendesk Chat Script-->  
+
+	 // Change location
+    $('.location-change').click(function() {
+        $('.location-search').addClass('hide');
+        $('.location-search-hide').removeClass('hide');
+    });
+    $('.location-change-close').click(function() {
+        $('.location-search').removeClass('hide');
+        $('.location-search-hide').addClass('hide');
+    });
+	
+	jQuery(document).ready(function($){
+	//set animation timing
+	var animationDelay = 2500,
+		//loading bar effect
+		barAnimationDelay = 3800,
+		barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the scss/css file
+		//letters effect
+		lettersDelay = 50,
+		//type effect
+		typeLettersDelay = 150,
+		selectionDuration = 500,
+		typeAnimationDelay = selectionDuration + 800,
+		//clip effect 
+		revealDuration = 600,
+		revealAnimationDelay = 1500;
+	
+	initHeadline();
+	
+
+	function initHeadline() {
+		//insert <i> element for each letter of a changing word
+		singleLetters($('.cd-headline.letters').find('b'));
+		//initialise headline animation
+		animateHeadline($('.cd-headline'));
+	}
+
+	function singleLetters($words) {
+		$words.each(function(){
+			var word = $(this),
+				letters = word.text().split(''),
+				selected = word.hasClass('is-visible');
+			for (i in letters) {
+				if(word.parents('.rotate-2').length > 0) letters[i] = '<em>' + letters[i] + '</em>';
+				letters[i] = (selected) ? '<i class="in">' + letters[i] + '</i>': '<i>' + letters[i] + '</i>';
+			}
+		    var newLetters = letters.join('');
+		    word.html(newLetters).css('opacity', 1);
+		});
+	}
+
+	function animateHeadline($headlines) {
+		var duration = animationDelay;
+		$headlines.each(function(){
+			var headline = $(this);
+			
+			if(headline.hasClass('loading-bar')) {
+				duration = barAnimationDelay;
+				setTimeout(function(){ headline.find('.cd-words-wrapper').addClass('is-loading') }, barWaiting);
+			} else if (headline.hasClass('clip')){
+				var spanWrapper = headline.find('.cd-words-wrapper'),
+					newWidth = spanWrapper.width() + 10
+				spanWrapper.css('width', newWidth);
+			} else if (!headline.hasClass('type') ) {
+				//assign to .cd-words-wrapper the width of its longest word
+				var words = headline.find('.cd-words-wrapper b'),
+					width = 0;
+				words.each(function(){
+					var wordWidth = $(this).width();
+				    if (wordWidth > width) width = wordWidth;
+				});
+				headline.find('.cd-words-wrapper').css('width', width);
+			};
+
+			//trigger animation
+			setTimeout(function(){ hideWord( headline.find('.is-visible').eq(0) ) }, duration);
+		});
+	}
+
+	function hideWord($word) {
+		var nextWord = takeNext($word);
+		
+		if($word.parents('.cd-headline').hasClass('type')) {
+			var parentSpan = $word.parent('.cd-words-wrapper');
+			parentSpan.addClass('selected').removeClass('waiting');	
+			setTimeout(function(){ 
+				parentSpan.removeClass('selected'); 
+				$word.removeClass('is-visible').addClass('is-hidden').children('i').removeClass('in').addClass('out');
+			}, selectionDuration);
+			setTimeout(function(){ showWord(nextWord, typeLettersDelay) }, typeAnimationDelay);
+		
+		} else if($word.parents('.cd-headline').hasClass('letters')) {
+			var bool = ($word.children('i').length >= nextWord.children('i').length) ? true : false;
+			hideLetter($word.find('i').eq(0), $word, bool, lettersDelay);
+			showLetter(nextWord.find('i').eq(0), nextWord, bool, lettersDelay);
+
+		}  else if($word.parents('.cd-headline').hasClass('clip')) {
+			$word.parents('.cd-words-wrapper').animate({ width : '2px' }, revealDuration, function(){
+				switchWord($word, nextWord);
+				showWord(nextWord);
+			});
+
+		} else if ($word.parents('.cd-headline').hasClass('loading-bar')){
+			$word.parents('.cd-words-wrapper').removeClass('is-loading');
+			switchWord($word, nextWord);
+			setTimeout(function(){ hideWord(nextWord) }, barAnimationDelay);
+			setTimeout(function(){ $word.parents('.cd-words-wrapper').addClass('is-loading') }, barWaiting);
+
+		} else {
+			switchWord($word, nextWord);
+			setTimeout(function(){ hideWord(nextWord) }, animationDelay);
+		}
+	}
+
+	function showWord($word, $duration) {
+		if($word.parents('.cd-headline').hasClass('type')) {
+			showLetter($word.find('i').eq(0), $word, false, $duration);
+			$word.addClass('is-visible').removeClass('is-hidden');
+
+		}  else if($word.parents('.cd-headline').hasClass('clip')) {
+			$word.parents('.cd-words-wrapper').animate({ 'width' : $word.width() + 10 }, revealDuration, function(){ 
+				setTimeout(function(){ hideWord($word) }, revealAnimationDelay); 
+			});
+		}
+	}
+
+	function hideLetter($letter, $word, $bool, $duration) {
+		$letter.removeClass('in').addClass('out');
+		
+		if(!$letter.is(':last-child')) {
+		 	setTimeout(function(){ hideLetter($letter.next(), $word, $bool, $duration); }, $duration);  
+		} else if($bool) { 
+		 	setTimeout(function(){ hideWord(takeNext($word)) }, animationDelay);
+		}
+
+		if($letter.is(':last-child') && $('html').hasClass('no-csstransitions')) {
+			var nextWord = takeNext($word);
+			switchWord($word, nextWord);
+		} 
+	}
+
+	function showLetter($letter, $word, $bool, $duration) {
+		$letter.addClass('in').removeClass('out');
+		
+		if(!$letter.is(':last-child')) { 
+			setTimeout(function(){ showLetter($letter.next(), $word, $bool, $duration); }, $duration); 
+		} else { 
+			if($word.parents('.cd-headline').hasClass('type')) { setTimeout(function(){ $word.parents('.cd-words-wrapper').addClass('waiting'); }, 200);}
+			if(!$bool) { setTimeout(function(){ hideWord($word) }, animationDelay) }
+		}
+	}
+
+	function takeNext($word) {
+		return (!$word.is(':last-child')) ? $word.next() : $word.parent().children().eq(0);
+	}
+
+	function takePrev($word) {
+		return (!$word.is(':first-child')) ? $word.prev() : $word.parent().children().last();
+	}
+
+	function switchWord($oldWord, $newWord) {
+		$oldWord.removeClass('is-visible').addClass('is-hidden');
+		$newWord.removeClass('is-hidden').addClass('is-visible');
+	}
+});
+
+$(document).ready(function(){
+    $("#more-enroll").click(function(){
+        $("#enrol-date").slideToggle("slow");
+    });
+});
+// svg path for target icon
+var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
+// svg path for plane icon
+var planeSVG = "M 100 100 L 300 100 L 200 300 z";
+
+window.map = AmCharts.makeChart("chartdiv", {
+    type: "map",
+    projection:"miller",
+    selectable: true,
+    zoomFactor: 2,
+    dataProvider: {
+        map: "worldLow",
+		zoomLevel: 5,
+		zoomLatitude: 22.5241,
+		zoomLongitude: 76.9366,        
+        /*  
+        lines: [{
+            id: "line1",
+            arc: -0.85,
+            alpha: 0.3,
+            latitudes: [12.97194, 55.378051, 17.385044, 4.210484, 11.016844],
+            longitudes: [77.59369, -3.43597299999999, 78.486671, 101.97576600000002, 76.955832]
+        }, {
+            id: "line2",
+            alpha: 0,
+            color: "#000000",
+            latitudes: [12.97194, 55.378051, 17.385044, 4.210484, 11.016844],
+            longitudes: [77.59369, -3.43597299999999,78.486671,  101.97576600000002, 76.955832]
+        }], */
+        images: [{
+		   svgPath:targetSVG,
+		   label:"Dilsukhnagar",
+		   title:"<b>Institute of Good Clinical Practice (IGCP)</b>, 2nd floor, Above More super market, Near Sripuram Colony Bus Stop, Malakpet, Hyderabad",
+		   latitude:17.453476,
+		   longitude:78.394363,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Uppal",
+		   title:"<b>Sri Venkata Sai Enterprises</b>, H.No. 1-164/2,Medipally, Uppal, Hyderabad, Telangana",
+		   latitude:17.329820,
+		   longitude:78.585580,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Mehdipatnam",
+		   title:"H.No. 12-2-718/1/1/A, Flat No.402, 4th Floor, AGM Grandeur, Nanal Nagar, Hyderabad",
+		   latitude:17.392930,
+		   longitude:78.428640,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Vijayawada",
+		   title:"<b>Sipnatech</b>, 40-7-12/A, 3rd Floor, Datta Lords House beside PVP Square, Moghalrajpuram Road, Vijayawada",
+		   latitude:17.392730,
+		   longitude:78.430790,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Guntur",
+		   title:"<b>4 Qube Technologies</b>, D.no-6-81/2, Near Power Office, Gujjangundla, Guntur",
+		   latitude:16.462887,
+		   longitude:80.618553,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Coimbatore",
+		   title:"<b>EXCELR</b>, 1st Floor, Lotus Building, NSR Road, Saibaba Colony, Coimbatore",
+		   latitude:11.025650,
+		   longitude:76.940361,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Visakhapatnam",
+		   title:"<b>INNOVATE DATA SYSTEMS</b> M.I.G-2/236, Sector-3, MVP Colony, Visakhapatnam",
+		   latitude:17.743210,
+		   longitude:83.329770,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Bengaluru",
+		   title:"<b>Skillnest Solutions</b>, #46, 1st floor, Maruthi Arcade, Double Road, BEML 3rd Stage, Rajarajeshwari Nagar, Near Shringagiri Shanmukha Temple, Bengaluru",
+		   latitude:12.912604,
+		   longitude:77.528975,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Chennai",
+		   title:"Door no:c1, No.3/330, OMR Road, Rajiv Gandhi Sali, Thuraipakkam, NJK Avenue, Thoraipakkam, Chennai",
+		   latitude:12.940520,
+		   longitude:80.236010,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"ECIL",
+		   title:"Flat no 401, P.N.R-S.S.V complex (KFC Building), A.S.Rao Nagar, Secunderabad",
+		   latitude:17.483690,
+		   longitude:78.592506,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Chennai",
+		   title:"<b>Scope Tech Solutions</b>,# 306 B Block 3rd floor, Rajankuppam Road, Aynambakkam, Chennai",
+		   latitude:12.990949,
+		   longitude:80.242622,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Bangalore",
+		   title:"<b>4 IConn Analytics</b>, Ardente Office One, # 1006, Hoodi Main Road, Hoodi Circle, Bangalore",
+		   latitude:12.992270,
+		   longitude:77.716100,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Kanpur",
+		   title:"<b>D Corp Consulting & Technology</b>, 117/K73 Second Floor Sarvoday Nagar, Near Devaki Chauraha, Kanpur",
+		   latitude:26.881920,
+		   longitude:80.977020,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Bangalore",
+		   title:"<b>DataLocus Solutions Pvt. Ltd</b>, Address: Vijay Mansion, No.46, 80feet Road, 2nd Floor, Kalyan Nagar, Banaswadi, Bengaluru",
+		   latitude:13.018150,
+		   longitude:77.654060,
+		   scale:2
+		},
+		{
+		   svgPath:targetSVG,
+		   label:"Ernakulam",
+		   title:"2nd Floor, Global Business Center, Swapnil Enclave, Opposite High Court Junction, Marine Drive, Ernakulam, Kerala - 682031",
+		   latitude:9.9816,
+		   longitude:76.2999,
+		   scale:2
+		},		
+		{
+		   svgPath:targetSVG,
+		   label:"Pune",
+		   title:"<b>Cognier Academy, 9 Chitra Appt, 996/A, Vetal Baba Circle, Gokhale Road, Shivaji Nagar, Pune",
+		   latitude:18.537090,
+		   longitude:73.834200,
+		   scale:2
+		}, {
+            svgPath: planeSVG,
+            positionOnLine: 0, 
+            color: "#000000",
+            alpha: 0.1,
+            animateAlongLine: true,
+            lineId: "line2",
+            flipDirection: false,
+            loop: true,
+            scale: 0.03,
+            positionScale: 1.3
+        }, {
+            svgPath: planeSVG,
+            positionOnLine: 0,
+            color: "#585869",
+            animateAlongLine: true,
+            lineId: "line1",
+            flipDirection: false,
+            loop: true,
+            scale: 0.03,
+            positionScale: 1.8
+        }]
+    },
+
+    areasSettings: {
+        unlistedAreasColor: "#8dd9ef"
+    },
+
+    imagesSettings: {
+        color: "#585869",
+        rollOverColor: "#585869",
+        selectedColor: "#585869",
+        pauseDuration: 0.2,
+        animationDuration: 4,
+        adjustAnimationSpeed: true
+    },
+
+    linesSettings: {
+        color: "#585869",
+        alpha: 0.4
+    },
+     
+    export:{
+     enabled:false
+    },
+  
+     fontSize:20
+  
+     
+});
+
+$(document).ready(function() {
+                $('#datatable').DataTable();
+
+                //Buttons examples
+                var table = $('#datatable-buttons').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf', 'colvis']
+                });
+				var table = $('#datatable-buttons1').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf', 'colvis']
+                });
+				var table = $('#datatable-buttons2').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf', 'colvis']
+                });
+
+                table.buttons().container()
+                        .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+            } );
+			
+			
+			
+function quick_enquiry() {
+	event.preventDefault();
+	var country_code = $("#enq_user_mobile1").intlTelInput("getSelectedCountryData").dialCode;
+	var enq_user_name = $("#enq_user_name1").val();
+	var enq_user_email = $("#enq_user_email1").val();
+	var enq_user_mobile = $("#enq_user_mobile1").val();
+	var enq_user_location = $("#enq_user_location1").val();
+	var enq_user_course = $("#enq_user_course1").val();
+	var enq_user_message = $("#enq_user_message1").val();
+	var enq_course = $("#enq_course1").val();
+	// var base_url = $("#base_url").val();
+	var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[a-zA-Z]{2,63}$/;
+    var validEmail = regEx.test(enq_user_email); 
+    var msg = 0;
+	
+	if(enq_user_name == ''){
+		$('#enq_user_name1').css('border-color', 'red');
+		// $('#enq_name_err1').html("Name is required");
+		msg = 1;
+	}else if($.isNumeric(enq_user_name)){
+		$('#enq_user_name1').css('border-color', 'red');
+		// $("#enq_name_err1").html("Name must be some alphabets");
+		msg = 1;
+	}else{
+		$('#enq_user_name1').css('border-color', '#ddd');
+		$('#enq_name_err1').hide();
+		// msg = 0;
+	}if(enq_user_email == ''){
+		$('#enq_user_email1').css('border-color', 'red');
+		// $('#enq_email_err1').html("Email is required");
+		msg = 1;
+	}else if($.isNumeric(enq_user_email)){
+		$('#enq_user_email').css('border-color', 'red');
+		// $("#enq_email_err").html("Email must be some alphabets");
+		msg = 1;
+	}else if (!validEmail || validEmail == false) {
+        $('#enq_user_email1').css('border-color', 'red');
+		// $('#enq_email_err1').html("Invalid Email");
+		 msg = 1;
+	}else{
+		$('#enq_user_email1').css('border-color', '#ddd');
+		$('#enq_email_err1').hide();
+		// msg = 0;
+	}if(enq_user_course == ''){
+		$('#enq_user_course1').css('border-color', 'red');
+		// $('#enq_course_err1').html("Course is required");
+		msg = 1;
+	}else if($.isNumeric(enq_user_course)){
+		$('#enq_user_course1').css('border-color', 'red');
+		// $("#enq_course_err1").html("Course must be some alphabets");
+		msg = 1;
+	}else{
+		$('#enq_user_course1').css('border-color', '#ddd');
+		$('#enq_course_err1').hide();
+		// msg = 0;
+	}if(enq_user_mobile == ''){
+		$('#enq_user_mobile1').css('border-color', 'red');
+		// $('#enq_mob_err1').html("Mobile No. is required");
+		msg = 1;
+	}else if(enq_user_mobile.length<10){
+		$('#enq_user_mobile1').css('border-color', 'red');
+		// $('#enq_mob_err1').html("Mobile No. must be 10 to 12 digits");
+		msg = 1;
+	}else{
+		$('#enq_user_mobile1').css('border-color', '#ddd');
+		$('#enq_mob_err1').hide();
+		// msg = 0;
+	}if(enq_user_location == ''){
+		$('#enq_user_location1').css('border-color', 'red');
+		// $('#enq_location_err1').html("Location is required");
+		msg = 1;
+	}else if($.isNumeric(enq_user_location)){
+		$('#enq_user_location1').css('border-color', 'red');
+		// $("#enq_location_err1").html("Location must be some alphabets");
+		msg = 1;
+	}else{
+		$('#enq_user_location1').css('border-color', '#ddd');
+		$('#enq_location_err1').hide();
+		// msg = 0;
+	}
+	if(msg==1){
+		return false;
+	}else{
+        $('.qe-ajax-loader').show();
+        $(".qe-btn").attr("disabled", true);		    
+		$.ajax({
+		type: "POST",
+		url: "https://www.excelr.com/home/add_query",
+		dataType: 'json',
+		data: {user_name: enq_user_name, user_email: enq_user_email, user_mobile: enq_user_mobile, user_location: enq_user_location, user_course: enq_user_course, user_message: enq_user_message, course: enq_course, country_code:country_code},
+		success: function(data) {
+			/*$("#enq_result1").show();
+			$("#enq_user_name1").val('');
+			$("#enq_user_email1").val('');
+			$("#enq_user_mobile1").val('');
+			$("#enq_user_location1").val('');
+			$("#enq_user_course1").val('');
+			$("#enq_user_message1").val('');
+			setTimeout(function(){
+				$("#enq_result1").hide();
+			}, 5000);*/
+            $('.qe-ajax-loader').hide();
+            $(".qe-btn").attr("disabled", false);				
+			window.location.href="https://www.excelr.com/thank-you";
+		}
+	}); 
+	}
+}
+function banner2_video(){
+		$("#banner2-video .players").html('<iframe  class="course-vide img-responsive" style="max-width:100%; width: 100%;" src="https://www.youtube.com/embed/9kB8Iu7X89Q" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+}
+</script>
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="4f8049cea8ff66ffeb30ed30-|49" defer=""></script></body>
+</html>
